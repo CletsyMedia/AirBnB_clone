@@ -31,7 +31,7 @@ def parse(arg):
         return bracket_retl
 
 
-class HbnbCommand(command.Cmd):
+class HBNBCommand(command.Cmd):
     """Defines the HolbertonBnB command interpreter.
 
     Attributes:
@@ -104,7 +104,7 @@ class HbnbCommand(command.Cmd):
         arglen = parse(arg)
         if len(arglen) == 0:
             print("** class name missing **")
-        elif arglen[0] not in HbnbCommand.__classes:
+        elif arglen[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
             print(eval(arglen[0])().id)
@@ -118,7 +118,7 @@ class HbnbCommand(command.Cmd):
         objdictionary = storage.all()
         if len(arglen) == 0:
             print("** class name missing **")
-        elif arglen[0] not in HbnbCommand.__classes:
+        elif arglen[0] not in HBNBCommand.__classes:
             print("** class does not exist **")
         elif len(arglen) == 1:
             print("** instance id is missing **")
@@ -134,7 +134,7 @@ class HbnbCommand(command.Cmd):
         objdictionary = storage.all()
         if len(arglen) == 0:
             print("** class name is missing **")
-        elif arglen[0] not in HbnbCommand.__classes:
+        elif arglen[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arglen) == 1:
             print("** instance id is missing **")
@@ -149,7 +149,7 @@ class HbnbCommand(command.Cmd):
         Display string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
         arglen = parse(arg)
-        if len(arglen) > 0 and arglen[0] not in HbnbCommand.__classes:
+        if len(arglen) > 0 and arglen[0] not in HBNBCommand.__classes:
             print("** class does not exist **")
         else:
             objlen = []
@@ -182,7 +182,7 @@ class HbnbCommand(command.Cmd):
         if len(arglen) == 0:
             print("** class name missing **")
             return False
-        if arglen[0] not in HbnbCommand.__classes:
+        if arglen[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return False
         if len(arglen) == 1:
@@ -221,4 +221,4 @@ class HbnbCommand(command.Cmd):
 
 
 if __name__ == "__main__":
-    HbnbCommand().cmdloop()
+    HBNBCommand().cmdloop()
