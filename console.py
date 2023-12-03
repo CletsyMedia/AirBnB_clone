@@ -31,7 +31,7 @@ def parse(arg):
         return bracket_retl
 
 
-class HBNBCommand(cmd.Cmd):
+class HBNBCommand(command.Cmd):
     """Defines the HolbertonBnB command interpreter.
 
     Attributes:
@@ -207,3 +207,25 @@ class HBNBCommand(cmd.Cmd):
             except NameError:
                 print("** value missing **")
                 return False
+              
+        if len(arglen) == 4:
+            obj = objdictionary["{}.{}".format(arglen[0], arglen[1])]
+            if arglen[2] in obj.__class__.__dict__.keys():
+                valtype = type(obj.__class__.__dict__[arglen[2]])
+                obj.__dict__[arglen[2]] = valtype(arglen[3])
+            else:
+                obj.__dict__[arglen[2]] = arglen[3]
+        elif type(eval(arglen[2])) == dict:
+            obj = objdictionary["{}.{}".format(arglen[0], arglen[1])]
+            for k, v in eval(arglen[2]).items():
+                if (k in obj.__class__.__dict__.keys() and
+                        type(obj.__class__.__dict__[k]) in {str, int, float}):
+                    valtype = type(obj.__class__.__dict__[k])
+                    obj.__dict__[k] = valtype(v)
+                else:
+                    obj.__dict__[k] = v
+        storage.save()
+
+
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
