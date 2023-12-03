@@ -30,7 +30,30 @@ class BaseModel:
             models.storage.new(self)
             
     def save(self):
-        """Update updated_at with the current datetime."""
+        """Update the 'updated_at' attribute with the current datetime
+        and save the instance to the storage system.
+        
+        This method ensures that the 'updated_at' attribute reflects the
+        most recent modification time, and it then calls the storage system
+        to persist the changes.
+        """
         self.updated_at = datetime.today()
         models.storage.save()
+
+    def to_dict(self):
+        """Return the dictionary of the BaseModel instance.
+
+        Includes the key/value pair __class__ representing
+        the class name of the object.
+        """
+        return_dict = self.__dict__.copy()
+        return_dict["created_at"] = self.created_at.isoformat()
+        return_dict["updated_at"] = self.updated_at.isoformat()
+        return_dict["__class__"] = self.__class__.__name__
+        return return_dict
+
+    def __str__(self):
+        """Return the print/str representation of the BaseModel instance."""
+        class_name = self.__class__.__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
