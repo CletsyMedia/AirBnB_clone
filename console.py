@@ -94,3 +94,116 @@ class HBNBCommand(cmd.Cmd):
         """
         print("")
         return True
+    
+    def do_create(self, arg):
+        """Create a new instance of a class and print its ID.
+
+        Usage: create <class>
+
+        This method creates a new instance of the specified class and prints its ID. If the class does not exist, it prints an error message.
+
+        Args:
+            arg (str): The name of the class to create an instance of.
+
+        Returns:
+            None
+        """
+        arglen = parse(arg)
+        if len(arglen) == 0:
+            print("** class name missing **")
+        elif arglen[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            print(eval(arglen[0])().id)
+            storage.save()
+        
+    def do_show(self, arg):
+        """Usage: show <class> <id> or <class>.show(<id>)
+        Display the string representation of a class instance of a given id.
+        """
+        arglen = parse(arg)
+        objdictionary = storage.all()
+        if len(arglen) == 0:
+            print("** class name missing **")
+        elif arglen[0] not in HBNBCommand.__classes:
+            print("** class does not exist **")
+        elif len(arglen) == 1:
+            print("** instance id is missing **")
+        elif "{}.{}".format(arglen[0], arglen[1]) not in objdictionary:
+            print("** no instance can be found **")
+        else:
+            print(objdictionary["{}.{}".format(arglen[0], arglen[1])])
+      
+    def do_destroy(self, arg):
+        """Usage: destroy <class> <id> or <class>.destroy(<id>)
+        Delete a class instance of a given id."""
+        arglen = parse(arg)
+        objdictionary = storage.all()
+        if len(arglen) == 0:
+            print("** class name is missing **")
+        elif arglen[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        elif len(arglen) == 1:
+            print("** instance id is missing **")
+        elif "{}.{}".format(arglen[0], arglen[1]) not in objdictionary.keys():
+            print("** no instance can be found **")
+        else:
+            del objdictionary["{}.{}".format(arglen[0], arglen[1])]
+            storage.save()
+            
+    def do_all(self, arg):
+        """Usage: all or all <class> or <class>.all()
+        Display string representations of all instances of a given class.
+        If no class is specified, displays all instantiated objects."""
+        arglen = parse(arg)
+        if len(arglen) > 0 and arglen[0] not in HBNBCommand.__classes:
+            print("** class does not exist **")
+        else:
+            objlen = []
+            for obj in storage.all().values():
+                if len(arglen) > 0 and arglen[0] == obj.__class__.__name__:
+                    objlen.append(obj.__str__())
+                elif len(arglen) == 0:
+                    objlen.append(obj.__str__())
+            print(objlen)
+  
+    def do_count(self, arg):
+        """Usage: count <class> or <class>.count()
+        Retrieve the number of instances of a given class."""
+        arglen = parse(arg)
+        counter = 0
+        for obj in storage.all().values():
+            if arglen[0] == obj.__class__.__name__:
+                counter += 1
+        print(counter)
+        
+    def do_update(self, arg):
+        """Usage: update <class> <id> <attribute_name> <attribute_value> or
+       <class>.update(<id>, <attribute_name>, <attribute_value>) or
+       <class>.update(<id>, <dictionary>)
+        Update a class instance of a given id by adding or updating
+        a given attribute key/value pair or dictionary."""
+        arglen = parse(arg)
+        objdictionary = storage.all()
+        
+        if len(arglen) == 0:
+            print("** class name missing **")
+            return False
+        if arglen[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+            return False
+        if len(arglen) == 1:
+            print("** instance id missing **")
+            return False
+        if "{}.{}".format(arglen[0], arglen[1]) not in objdictionary.keys():
+            print("** no instance found **")
+            return False
+        if len(arglen) == 2:
+            print("** attribute name missing **")
+            return False
+        if len(arglen) == 3:
+            try:
+                type(eval(arglen[2])) != dict
+            except NameError:
+                print("** value missing **")
+                return False
