@@ -724,11 +724,11 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
             self.assertNotIn(obj, storage.all())
 
 
-class TestHBNBCommandAll(unittest.TestCase):
+class TestHBNBCommandAll(HBNBCommandTestCase):
     """Unittests for testing all of the HBNB command interpreter."""
 
     @classmethod
-    def setUp(self):
+    def setUpClass(cls):
         try:
             os.rename("file.json", "tmp")
         except IOError:
