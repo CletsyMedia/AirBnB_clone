@@ -736,7 +736,7 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
         FileStorage.__objects = {}
 
     @classmethod
-    def tearDown(self):
+    def tearDownClass(cls):
         try:
             os.remove("file.json")
         except IOError:
