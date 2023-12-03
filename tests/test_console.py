@@ -16,7 +16,7 @@ Unittest classes:
     - TestHBNBCommandUpdate: Tests for console update command.
 """
 import os
-import sys
+# import sys
 import unittest
 from io import StringIO
 from unittest.mock import patch
@@ -33,7 +33,7 @@ class HBNBCommandTestCase(unittest.TestCase):
         self.hbnb_cmd = HBNBCommand()
 
 
-class TestHBNBCommand_prompting(HBNBCommandTestCase):
+class TestHBNBCommandPrompting(HBNBCommandTestCase):
     """Unittests for testing prompting of the HBNB command interpreter."""
 
     def test_prompt_string(self):
@@ -71,7 +71,7 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("help EOF"))
             self.assertEqual(help_msg, output.getvalue().strip())
-            
+
     def help_show(self):
         help_msg = ("Usage: show <class> <id> or <class>.show(<id>)\n        "
              "Display the string representation of a class instance of"
@@ -79,9 +79,9 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("help show"))
             self.assertEqual(help_msg, output.getvalue().strip())
-            
+
     def help_destroy(self):
-        help_msg = ("Usage: destroy <class> <id> or <class>.destroy(<id>)\n        "
+        help_msg = ("Usage: destroy <class> <id>)\n        "
                     "Delete a class instance of a given id.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("help destroy"))
@@ -89,8 +89,8 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
 
     def help_all(self):
         help_msg = ("Usage: all or all <class> or <class>.all()\n        "
-                    "Display string representations of all instances of a given class"
-                    ".\n        If no class is specified, displays all instantiated "
+                    "Display string representation of all instances of a class"
+                    ".\n  If no class is specified, displays all instantiated "
                     "objects.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("help all"))
@@ -469,7 +469,7 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
             self.assertEqual(obj.__str__(), output.getvalue().strip())
 
 
-class TestHBNBCommandDestroy(unittest.TestCase):
+class TestHBNBCommandDestroy(HBNBCommandTestCase):
     """Unittests for testing destroy from the HBNB command interpreter."""
 
     @classmethod
