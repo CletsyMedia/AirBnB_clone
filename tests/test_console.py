@@ -116,7 +116,7 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
     def help(self):
         help_msg = ("Documented commands (type help <topic>):\n"
                     "========================================\n"
-                    "EOF  all  count  create  destroy  help  quit  show  update")
+                    "EOF all count create destroy  help quit show update")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("help"))
             self.assertEqual(help_msg, output.getvalue().strip())
@@ -132,7 +132,7 @@ class TestHBNBCommandExit(HBNBCommandTestCase):
     def EOF_exits(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(self.hbnb_cmd.onecmd("EOF"))
-    
+
 
 class TestHBNBCommandCreate(HBNBCommandTestCase):
     """Unittests for testing create from the HBNB command interpreter."""
@@ -279,7 +279,7 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("show Review"))
             self.assertEqual(correct, output.getvalue().strip())
-            
+
     def show_missing_id_dot_notation(self):
         correct = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
