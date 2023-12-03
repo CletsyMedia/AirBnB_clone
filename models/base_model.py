@@ -13,8 +13,8 @@ class BaseModel:
 
         Attributes:
             id (str): A unique identifier for each instance.
-            created_at (datetime): The datetime when an instance is created.
-            updated_at (datetime): The datetime when an instance is last updated.
+            created_at (datetime): When an instance is created.
+            updated_at (datetime): When an instance is last updated.
         """
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
@@ -28,11 +28,11 @@ class BaseModel:
                     self.__dict__[k] = v
         else:
             models.storage.new(self)
-            
+
     def save(self):
         """Update the 'updated_at' attribute with the current datetime
         and save the instance to the storage system.
-        
+
         This method ensures that the 'updated_at' attribute reflects the
         most recent modification time, and it then calls the storage system
         to persist the changes.
@@ -56,4 +56,3 @@ class BaseModel:
         """Return the print/str representation of the BaseModel instance."""
         class_name = self.__class__.__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
-
