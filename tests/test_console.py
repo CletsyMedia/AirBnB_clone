@@ -104,10 +104,10 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
             self.assertEqual(help_msg, output.getvalue().strip())
 
     def help_update(self):
-        help_msg = ("Usage: update <class> <id> <attribute_name> <attribute_value> or"
-                    "\n       <class>.update(<id>, <attribute_name>, <attribute_value"
-                    ">) or\n       <class>.update(<id>, <dictionary>)\n        "
-                    "Update a class instance of a given id by adding or updating\n   "
+        help_msg = ("Usage: update <class> <id> <attri_name> <attri_value> or"
+                    "\n  <class>.update(<id>, <attri_name>, <attri_value"
+                    ">) or\n       <class>.update(<id>, <dictionary>)\n       "
+                    "Update a class instance id by adding or updating\n   "
                     "     a given attribute key/value pair or dictionary.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("help update"))
