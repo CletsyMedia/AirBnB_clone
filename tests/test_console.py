@@ -73,9 +73,11 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
             self.assertEqual(help_msg, output.getvalue().strip())
 
     def help_show(self):
-        help_msg = ("Usage: show <class> <id> or <class>.show(<id>)\n        "
-             "Display the string representation of a class instance of"
-             " a given id.")
+        help_msg = (
+            "Usage: show <class> <id> or <class>.show(<id>)\n        "
+            "Display the string representation of a class instance of"
+            " a given id."
+        )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("help show"))
             self.assertEqual(help_msg, output.getvalue().strip())
