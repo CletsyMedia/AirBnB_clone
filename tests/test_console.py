@@ -128,11 +128,11 @@ class TestHBNBCommandExit(HBNBCommandTestCase):
     """Unittests for exiting from the HBNB command interpreter."""
 
     def quit_exits(self):
-        with patch("sys.stdout", new=StringIO()) as _:
+        with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(self.hbnb_cmd.onecmd("quit"))
 
     def EOF_exits(self):
-        with patch("sys.stdout", new=StringIO()) as _:
+        with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(self.hbnb_cmd.onecmd("EOF"))
 
 
