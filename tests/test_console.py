@@ -412,7 +412,6 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
             self.assertFalse(self.hbnb_cmd.onecmd(command))
             self.assertEqual(obj.__str__(), output.getvalue().strip())
 
-    def show_objects_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("create BaseModel"))
             testID = output.getvalue().strip()
