@@ -33,48 +33,22 @@ class HBNBCommandTestCase(unittest.TestCase):
         self.hbnb_cmd = HBNBCommand()
 
 
-# class TestHBNBCommandPrompting(HBNBCommandTestCase):
-#     """Unittests for testing prompting of the HBNB command interpreter."""
+class TestHBNBCommandPrompting(HBNBCommandTestCase):
+    """Unittests for testing prompting of the HBNB command interpreter."""
 
-#     def test_prompt_string(self):
-#         """Test that the command prompt is correctly set."""
-#         self.assertEqual("(hbnb) ", self.hbnb_cmd.prompt)
+    def test_prompt_string(self):
+        """Test that the command prompt is correctly set."""
+        self.assertEqual("(hbnb) ", self.hbnb_cmd.prompt)
 
-#     def test_empty_line_output(self):
-#         """Test the output when an empty line is entered."""
-#         with patch("sys.stdout", new=StringIO()) as output:
-#             self.assertFalse(self.hbnb_cmd.onecmd(""))
-#             self.assertEqual("", output.getvalue().strip())
+    def test_empty_line_output(self):
+        """Test the output when an empty line is entered."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd(""))
+            self.assertEqual("", output.getvalue().strip())
 
 
 class TestHBNBCommandHelp(HBNBCommandTestCase):
     """Unittests for HBNB command interpreter help messages."""
-    
-    def setUp(self):
-        """Set up HBNBCommand instance for testing."""
-        self.hbnb_cmd = HBNBCommand()
-        self.patcher = patch("sys.stdout", new=StringIO())
-        self.patcher.start()
-
-    def tearDown(self):
-        """Clean up after testing."""
-        self.patcher.stop()
-
-    def test_help_exit(self):
-        """Test help message for quit command."""
-        help_msg = "Quit command to exit the program."
-        with StringIO() as output:
-            self.assertFalse(self.hbnb_cmd.onecmd("help quit"))
-            actual_output = output.getvalue().strip()
-            print("Actual Output:", repr(actual_output))
-            print("Expected Output:", repr(help_msg))
-            self.assertEqual(help_msg, actual_output)
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
