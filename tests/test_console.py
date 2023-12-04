@@ -229,8 +229,9 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
         """Test show command with dot notation and no instance found."""
         correct = "** no instance can be found **"
 
-        classes = ["BaseModel", "User", "State",
-                   "City", "Amenity", "Place", "Review"
+        classes = [
+            "BaseModel", "User", "State", "City",
+            "Amenity", "Place", "Review"
         ]
 
         for class_name in classes:
@@ -238,8 +239,12 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
                 self.assertFalse(self.hbnb_cmd.onecmd(f"{class_name}.show(1)"))
                 self.assertEqual(correct, output.getvalue().strip())
 
-
-
+    def test_show_objects_space_notation(self):
+        """Test show command with 'objects' in space notation."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("show objects BaseModel"))
+            show_output = output.getvalue().strip()
+            self.assertTrue(show_output)
 
 
 class TestHBNBCommandAll(HBNBCommandTestCase):
