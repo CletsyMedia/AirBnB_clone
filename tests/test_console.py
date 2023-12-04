@@ -83,5 +83,24 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
             self.assertIn("** class doesn't exist **", error_output)
 
 
+class TestHBNBCommandAll(HBNBCommandTestCase):
+    """Unittests for the all command."""
+
+    def test_all_command(self):
+        """Test the all command."""
+        # Assuming there are some instances in the storage
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("all"))
+            all_output = output.getvalue().strip()
+            self.assertTrue(all_output)  # Assuming the string representations are printed
+
+    def test_all_invalid_class(self):
+        """Test all command with an invalid class."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("all InvalidClass"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** class doesn't exist **", error_output)
+
+
 if __name__ == "__main__":
     unittest.main()
