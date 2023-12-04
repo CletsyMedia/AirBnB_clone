@@ -121,7 +121,7 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("all InvalidClass"))
             error_output = output.getvalue().strip()
-            self.assertIn("** class does not exist **", error_output)  # Update this line
+            self.assertIn("** class does not exist **", error_output)
 
 
 class TestHBNBCommandDestroy(HBNBCommandTestCase):
@@ -133,7 +133,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 789"))
             destroy_output = output.getvalue().strip()
-            self.assertEqual("** no instance can be found **", destroy_output)  # Update this line
+            self.assertEqual("** no instance can be found **", destroy_output)
 
     def test_destroy_invalid_id(self):
         """Test destroy command with an invalid ID."""
@@ -141,7 +141,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 101"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **", error_output)  # Update this line
+            self.assertIn("** no instance can be found **", error_output)
 
 
 class TestHBNBCommandUpdate(HBNBCommandTestCase):
@@ -153,7 +153,7 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("update BaseModel 999 name 'new_name'"))
             update_output = output.getvalue().strip()
-            self.assertEqual("** no instance found **", update_output)  # Update this line
+            self.assertEqual("** no instance found **", update_output)
 
     def test_update_invalid_attribute(self):
         """Test update command with an invalid attribute."""
@@ -161,8 +161,7 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("update BaseModel 103 invalid_attribute 'new_value'"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance found **", error_output)  # Update this line
-
+            self.assertIn("** no instance found **", error_output)
 
 
 if __name__ == "__main__":
