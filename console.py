@@ -49,6 +49,7 @@ class HBNBCommand(command.Cmd):
         "User"
     }
 
+
     def emptyline(self):
         """Do nothing when receiving an empty line."""
         pass
@@ -94,7 +95,7 @@ class HBNBCommand(command.Cmd):
         """
         print("")
         return True
-
+    
     def do_create(self, arg):
         """Create a new instance of a class and print its ID.
 
@@ -116,7 +117,7 @@ class HBNBCommand(command.Cmd):
         else:
             print(eval(arglen[0])().id)
             storage.save()
-
+        
     def do_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)
         Display the string representation of a class instance of a given id.
@@ -133,7 +134,7 @@ class HBNBCommand(command.Cmd):
             print("** no instance can be found **")
         else:
             print(objdictionary["{}.{}".format(arglen[0], arglen[1])])
-
+      
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
         Delete a class instance of a given id."""
@@ -150,7 +151,7 @@ class HBNBCommand(command.Cmd):
         else:
             del objdictionary["{}.{}".format(arglen[0], arglen[1])]
             storage.save()
-
+            
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
         Display string representations of all instances of a given class.
@@ -166,7 +167,7 @@ class HBNBCommand(command.Cmd):
                 elif len(arglen) == 0:
                     objlen.append(obj.__str__())
             print(objlen)
-
+  
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
         Retrieve the number of instances of a given class."""
@@ -176,55 +177,59 @@ class HBNBCommand(command.Cmd):
             if arglen[0] == obj.__class__.__name__:
                 counter += 1
         print(counter)
-
+        
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
-       <class>.update(<id>, <attribute_name>, <attribute_value>) or
-       <class>.update(<id>, <dictionary>)
+        <class>.update(<id>, <attribute_name>, <attribute_value>) or
+        <class>.update(<id>, <dictionary>)
         Update a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary."""
         argl = parse(arg)
         objdict = storage.all()
 
-        if len(argl) == 0:
-            print("** class name missing **")
+        if len(argl) < 4:
+            print("** Missing arguments. See help update **")
             return False
-        if argl[0] not in HBNBCommand.__classes:
-            print("** class doesn't exist **")
+
+        class_name, obj_id, attr_name, attr_value = argl
+
+        if class_name not in HBNBCommand.__classes:
+            print("** Class doesn't exist **")
             return False
-        if len(argl) == 1:
-            print("** instance id missing **")
+
+        key = "{}.{}".format(class_name, obj_id)
+        if key not in objdict:
+            print("** No instance found **")
             return False
-        if "{}.{}".format(argl[0], argl[1]) not in objdict.keys():
-            print("** no instance found **")
-            return False
-        if len(argl) == 2:
-            print("** attribute name missing **")
-            return False
-        if len(argl) == 3:
+
+        obj = objdict[key]
+
+        # Single attribute update
+        if len(argl) == 4:
             try:
-                type(eval(argl[2])) != dict
-            except NameError:
-                print("** value missing **")
+                setattr(obj, attr_name, eval(attr_value))
+            except AttributeError:
+                print("** Attribute doesn't exist **")
                 return False
 
-        if len(argl) == 4:
-            obj = objdict["{}.{}".format(argl[0], argl[1])]
-            if argl[2] in obj.__class__.__dict__.keys():
-                valtype = type(obj.__class__.__dict__[argl[2]])
-                obj.__dict__[argl[2]] = valtype(argl[3])
-            else:
-                obj.__dict__[argl[2]] = argl[3]
-        elif type(eval(argl[2])) == dict:
-            obj = objdict["{}.{}".format(argl[0], argl[1])]
-            for k, v in eval(argl[2]).items():
-                if (k in obj.__class__.__dict__.keys() and
-                        type(obj.__class__.__dict__[k]) in {str, int, float}):
-                    valtype = type(obj.__class__.__dict__[k])
-                    obj.__dict__[k] = valtype(v)
-                else:
-                    obj.__dict__[k] = v
+        # Dictionary update
+        elif len(argl) == 5 and attr_name == "{":
+            try:
+                attr_dict = eval(attr_value)
+                if not isinstance(attr_dict, dict):
+                    raise ValueError
+                for key, val in attr_dict.items():
+                    setattr(obj, key, val)
+            except (SyntaxError, ValueError):
+                print("** Invalid dictionary format **")
+                return False
+        else:
+            print("** Invalid arguments. See help update **")
+            return False
+
         storage.save()
+
+
 
 
 if __name__ == "__main__":
