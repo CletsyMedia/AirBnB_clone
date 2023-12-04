@@ -308,6 +308,21 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 123"))
             error_output = output.getvalue().strip()
             self.assertIn("** no instance can be found **", error_output)
+            
+    def test_destroy_missing_dot_notation(self):
+        """Test destroy command with missing dot notation."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("BaseModel.destroy()"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** instance id is missing **", error_output)        
+
+    def test_destroy_invalid_id_space_notation(self):
+        """Test destroy command with invalid ID and space notation."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 1"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** no instance can be found **", error_output)
+
 
 class TestHBNBCommandUpdate(HBNBCommandTestCase):
     """Unittests for the update command."""
