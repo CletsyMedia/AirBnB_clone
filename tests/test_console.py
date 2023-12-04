@@ -452,6 +452,13 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
             expected_output = "class doesn't exist"
             self.assertIn(expected_output, output.getvalue().strip())
     
+    def test_update_nonexistent_class(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("update NonExistentClass 123"))
+            self.assertEqual("** class doesn't exist **", output.getvalue().strip())
+    
+    
+    
     
 if __name__ == "__main__":
     unittest.main()
