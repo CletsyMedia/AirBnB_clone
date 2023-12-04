@@ -85,6 +85,7 @@ class HBNBCommand(command.Cmd):
         """
         return True
 
+
     def do_EOF(self, arg):
         """EOF signals to exit the program.
 
