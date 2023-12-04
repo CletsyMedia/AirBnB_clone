@@ -105,6 +105,13 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
             error_output = output.getvalue().strip()
             self.assertIn("** class doesn't exist **", error_output)
 
+    def test_create_missing_class(self):
+        """Test create command with a missing class argument."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("create"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** class name missing **", error_output)
+
 
 class TestHBNBCommandShow(HBNBCommandTestCase):
     """Unittests for the show command."""
