@@ -54,8 +54,11 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
         """Test help message for quit command."""
         help_msg = "Quit command to exit the program."
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(self.hbnb_cmd.onecmd("help quit"))
-            self.assertEqual(help_msg, output.getvalue().strip())
+        self.assertFalse(self.hbnb_cmd.onecmd("help quit"))
+        actual_output = output.getvalue().strip()
+        print("Actual Output:", repr(actual_output))  # Add this line
+        self.assertEqual(help_msg, actual_output)
+
 
 
 if __name__ == "__main__":
