@@ -68,6 +68,29 @@ class TestHBNBCommandQuit(HBNBCommandTestCase):
 class TestHBNBCommandCreate(HBNBCommandTestCase):
     """Unittests for the create command."""
 
+    @classmethod
+    def setUpClass(cls):
+        """Set up class-level resources."""
+        # Perform setup actions, e.g., rename file.json to tmp and clear objts
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear down class-level resources."""
+        # Perform teardown actions, e.g., remove file.json and rename tmp back
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
     def test_create_command(self):
         """Test the create command."""
         with patch("sys.stdout", new=StringIO()) as output:
