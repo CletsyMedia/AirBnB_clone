@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Defining the HBnB console command"""
-import cmd
+import cmd as cmd
 import re as regexp
 from shlex import split
 from models import storage
@@ -77,7 +77,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command to exit the program.
-
         This method terminates the HolbertonBnB command interpreter and exits the program. It takes no arguments.
 
         Returns:
@@ -89,7 +88,10 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """EOF signals to exit the program.
 
-        This method is called when the user enters the EOF (End Of File) character (usually Ctrl-D) to signal the end of input. It terminates the HolbertonBnB command interpreter and exits the program. It takes no arguments.
+        This method is called when the user enters the EOF (End Of File)
+        character (usually Ctrl-D) to signal the end of input. It terminates
+        the HolbertonBnB command interpreter and exits the program.
+        It takes no arguments.
 
         Returns:
             bool: True to indicate that the program should exit.
