@@ -83,6 +83,27 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
             self.assertIn("** class doesn't exist **", error_output)
 
 
+class TestHBNBCommandShow(HBNBCommandTestCase):
+    """Unittests for the show command."""
+
+    def test_show_invalid_class(self):
+        """Test show command with an invalid class."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("show InvalidClass 123"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** class does not exist **",
+                          error_output)  # Update this line
+
+    def test_show_invalid_id(self):
+        """Test show command with an invalid ID."""
+        # Assuming there is no BaseModel instance with ID '456'
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel 456"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** no instance can be found **",
+                          error_output)  # Update this line
+
+
 class TestHBNBCommandAll(HBNBCommandTestCase):
     """Unittests for the all command."""
 
@@ -92,14 +113,15 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("all"))
             all_output = output.getvalue().strip()
-            self.assertTrue(all_output)  # Assuming the string representations are printed
+            # Assuming the string representations are printed
+            self.assertTrue(all_output)
 
     def test_all_invalid_class(self):
         """Test all command with an invalid class."""
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("all InvalidClass"))
             error_output = output.getvalue().strip()
-            self.assertIn("** class doesn't exist **", error_output)
+            self.assertIn("** class does not exist **", error_output)  # Update this line
 
 
 if __name__ == "__main__":
