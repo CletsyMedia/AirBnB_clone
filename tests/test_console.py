@@ -112,6 +112,20 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
             error_output = output.getvalue().strip()
             self.assertIn("** class name missing **", error_output)
 
+    def test_create_invalid_syntax(self):
+        """Test create for invalid syntax."""
+        test_cases = [
+            ("MyModel.create()", "*** Unknown syntax: MyModel.create()"),
+            ("BaseModel.create()", "*** Unknown syntax: BaseModel.create()")
+        ]
+
+        for command, expected_output in test_cases:
+            with patch("sys.stdout", new=StringIO()) as output:
+                self.assertFalse(self.hbnb_cmd.onecmd(command))
+                self.assertEqual(expected_output, output.getvalue().strip())
+
+    
+
 
 class TestHBNBCommandShow(HBNBCommandTestCase):
     """Unittests for the show command."""
