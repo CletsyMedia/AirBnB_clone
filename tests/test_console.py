@@ -152,7 +152,7 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
 
 class TestHBNBCommandShow(HBNBCommandTestCase):
     """Unittests for the show command."""
-    
+
     @classmethod
     def setUpClass(cls):
         """Set up class-level resources."""
@@ -199,8 +199,8 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel 1 2 3"))
             show_output = output.getvalue().strip()
-            self.assertTrue(show_output) 
-    
+            self.assertTrue(show_output)
+
     def test_show_dot_notation(self):
         """Test show command with dot notation."""
         # Assuming there is a BaseModel instance with ID '123'
@@ -209,6 +209,13 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
             show_output = output.getvalue().strip()
             self.assertTrue(show_output)
 
+    def test_show_no_instance_found(self):
+        """Test show command with no instance found."""
+        # Assuming there is no BaseModel instance with ID '789'
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel 789"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** no instance can be found **", error_output)
 
 
 class TestHBNBCommandAll(HBNBCommandTestCase):
