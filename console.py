@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Defining the HBnB console command"""
-import cmd as command
+import cmd
 import re as regexp
 from shlex import split
 from models import storage
@@ -31,8 +31,8 @@ def parse(arg):
         return bracket_retl
 
 
-class HBNBCommand(command.Cmd):
-    """Defines the HolbertonBnB command interpreter.
+class HBNBCommand(cmd.Cmd):
+    """Defines the Holbertomdcmd interpreter.
 
     Attributes:
         prompt (str): The command prompt.
