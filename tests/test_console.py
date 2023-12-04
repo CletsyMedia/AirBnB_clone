@@ -16,6 +16,7 @@ Unittest classes:
     - TestHBNBCommandUpdate: Tests for console update command.
 """
 import os
+import re as regexp
 import sys
 import unittest
 from io import StringIO
@@ -286,8 +287,33 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
             "Amenity", "Place", "Review"
         ]
         for clsas in classes_to_check:
-            err_msg = f"{clsas} not found in {output_lns}"
-            self.assertTrue(any(clsas in line for line in output_lns), err_msg)
+            er_msg = f"{clsas} not found in {output_lns}"
+            self.assertTrue(any(clsas in line for line in output_lns), er_msg)
+
+    def test_all_objects_dot_notation(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("BaseModel.create()"))
+            self.assertFalse(self.hbnb_cmd.onecmd("User.create()"))
+            self.assertFalse(self.hbnb_cmd.onecmd("State.create()"))
+            self.assertFalse(self.hbnb_cmd.onecmd("Place.create()"))
+            self.assertFalse(self.hbnb_cmd.onecmd("City.create()"))
+            self.assertFalse(self.hbnb_cmd.onecmd("Amenity.create()"))
+            self.assertFalse(self.hbnb_cmd.onecmd("Review.create()"))
+
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("all"))
+            output_lns = output.getvalue().strip().split('\n')
+
+            # Use a regex to check if each class name is a standalone word
+            classes_to_check = [
+                "BaseModel", "User", "State", "City",
+                "Amenity", "Place", "Review"
+            ]
+            for cls_nm in classes_to_check:
+                # Use regexp instead of regex
+                repx = r'\b{}\b'.format(cls_nm)
+                self.assertTrue(any(regexp.search(repx, line) for line in output_lns),
+                                f"{cls_nm} not found in {output_lns}")
 
 
 class TestHBNBCommandDestroy(HBNBCommandTestCase):
