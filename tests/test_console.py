@@ -50,6 +50,39 @@ class TestHBNBCommandPrompting(HBNBCommandTestCase):
 class TestHBNBCommandHelp(HBNBCommandTestCase):
     """Unittests for HBNB command interpreter help messages."""
 
+    def test_help_command(self):
+        """Test the help command."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("help"))
+            help_output = output.getvalue().strip()
+            self.assertIn("Documented commands (type help <topic>):", help_output)
+            self.assertIn("EOF  help  quit", help_output)
+
+    def test_help_quit_command(self):
+        """Test the help command for quit."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("help quit"))
+            help_output = output.getvalue().strip()
+            self.assertIn("Quit command to exit the program.", help_output)
+
+class TestHBNBCommandQuit(HBNBCommandTestCase):
+    """Unittests for the quit command."""
+
+    def test_quit_command(self):
+        """Test the quit command."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertTrue(self.hbnb_cmd.onecmd("quit"))
+            quit_output = output.getvalue().strip()
+            self.assertEqual("", quit_output)
+
+    def test_EOF_command(self):
+        """Test the EOF command."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertTrue(self.hbnb_cmd.onecmd("EOF"))
+            eof_output = output.getvalue().strip()
+            self.assertEqual("", eof_output)
+
+
 
 if __name__ == "__main__":
     unittest.main()
