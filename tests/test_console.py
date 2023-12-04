@@ -298,7 +298,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy InvalidClass 123"))
             error_output = output.getvalue().strip()
-            self.assertIn("** class does not exist **", error_output)
+            self.assertIn("** class doesn't exist **", error_output)
 
 
 class TestHBNBCommandUpdate(HBNBCommandTestCase):
