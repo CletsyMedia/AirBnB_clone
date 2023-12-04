@@ -438,6 +438,20 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
             error_output = output.getvalue().strip()
             self.assertIn("** no instance found **", error_output)
 
-
+    def test_update_missing_class(self):
+        """Test update command with missing class."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("update"))
+            expected_output = "class name missing"
+            self.assertIn(expected_output, output.getvalue().strip())
+            
+    def test_update_invalid_class(self):
+        """Test update command with an invalid class."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("update InvalidClass"))
+            expected_output = "Invalid class name"
+            self.assertIn(expected_output, output.getvalue().strip())
+    
+    
 if __name__ == "__main__":
     unittest.main()
