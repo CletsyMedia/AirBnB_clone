@@ -122,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(eval(arglen[0])().id)
             storage.save()
-        
+
     def do_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)
         Display the string representation of a class instance of a given id.
@@ -139,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance can be found **")
         else:
             print(objdictionary["{}.{}".format(arglen[0], arglen[1])])
-      
+
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
         Delete a class instance of a given id."""
@@ -156,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             del objdictionary["{}.{}".format(arglen[0], arglen[1])]
             storage.save()
-            
+   
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
         Display string representations of all instances of a given class.
@@ -182,7 +182,7 @@ class HBNBCommand(cmd.Cmd):
             if arglen[0] == obj.__class__.__name__:
                 counter += 1
         print(counter)
-        
+
     def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
         <class>.update(<id>, <attribute_name>, <attribute_value>) or
@@ -231,8 +231,6 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     obj.__dict__[k] = v
         storage.save()
-
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
