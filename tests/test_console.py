@@ -270,6 +270,29 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
 class TestHBNBCommandDestroy(HBNBCommandTestCase):
     """Unittests for the destroy command."""
 
+    @classmethod
+    def setUpClass(cls):
+        """Set up class-level resources."""
+        # Perform setup actions, e.g., rename file.json to tmp and clear objts
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear down class-level resources."""
+        # Perform teardown actions, e.g., remove file.json and rename tmp back
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
     def test_destroy_command(self):
         """Test the destroy command."""
         # Assuming there is a BaseModel instance with ID '789'
@@ -285,7 +308,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 101"))
             error_output = output.getvalue().strip()
             self.assertIn("** no instance can be found **", error_output)
-            
+
     def test_destroy_miss_class(self):
         """Test destroy command with missing class."""
         with patch("sys.stdout", new=StringIO()) as output:
@@ -300,7 +323,6 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
             error_output = output.getvalue().strip()
             self.assertIn("** class doesn't exist **", error_output)
 
-
     def test_destroy_space_notation(self):
         """Test destroy command with space notation."""
         # Assuming there is no BaseModel instance with ID '123'
@@ -308,13 +330,13 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 123"))
             error_output = output.getvalue().strip()
             self.assertIn("** no instance can be found **", error_output)
-            
+
     def test_destroy_missing_dot_notation(self):
         """Test destroy command with missing dot notation."""
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("BaseModel.destroy()"))
             error_output = output.getvalue().strip()
-            self.assertIn("** instance id is missing **", error_output)        
+            self.assertIn("** instance id is missing **", error_output)
 
     def test_destroy_invalid_id_space_notation(self):
         """Test destroy command with invalid ID and space notation."""
