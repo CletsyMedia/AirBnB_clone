@@ -74,15 +74,9 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
             self.assertFalse(self.hbnb_cmd.onecmd("help"))
             help_output = output.getvalue().strip()
             print("Actual Output:\n", help_output)  # Add this line for debugging
-            self.assertIn("EOF", help_output)
-            self.assertIn("all", help_output)
-            self.assertIn("count", help_output)
-            self.assertIn("create", help_output)
-            self.assertIn("destroy", help_output)
-            self.assertIn("help", help_output)
-            self.assertIn("quit", help_output)
-            self.assertIn("show", help_output)
-            self.assertIn("update", help_output)
+            self.assertIn("Documented commands (type help <topic>):", help_output)
+            self.assertIn("EOF  all  count  create  destroy  help  quit  show  update", help_output)
+            self.assertIn("Quit command to exit the program.", help_output)
 
     def test_help_quit_command(self):
         """Test the help command for quit."""
