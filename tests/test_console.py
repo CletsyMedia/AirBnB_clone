@@ -323,6 +323,12 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
             self.assertFalse(self.hbnb_cmd.onecmd("all BaseModel"))
             self.assertIn("BaseModel", output.getvalue().strip())
 
+    def test_all_single_object_dot_notation(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("BaseModel.create()"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("all BaseModel"))
+            self.assertIn("BaseModel", output.getvalue().strip())
 
 
 class TestHBNBCommandDestroy(HBNBCommandTestCase):
