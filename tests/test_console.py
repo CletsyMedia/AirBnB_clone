@@ -449,7 +449,7 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
         """Test update command with an invalid class."""
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("update InvalidClass"))
-            expected_output = "Invalid class name"
+            expected_output = "class doesn't exist"
             self.assertIn(expected_output, output.getvalue().strip())
     
     
