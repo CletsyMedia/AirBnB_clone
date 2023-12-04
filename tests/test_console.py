@@ -316,6 +316,14 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
                                     for line in output_lns),
                                 f"{cls_nm} not found in {output_lns}")
 
+    def test_all_single_object_space_notation(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("create BaseModel"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("all BaseModel"))
+            self.assertIn("BaseModel", output.getvalue().strip())
+
+
 
 class TestHBNBCommandDestroy(HBNBCommandTestCase):
     """Unittests for the destroy command."""
