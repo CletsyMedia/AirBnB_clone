@@ -124,5 +124,31 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
             self.assertIn("** class does not exist **", error_output)  # Update this line
 
 
+class TestHBNBCommandDestroy(HBNBCommandTestCase):
+    """Unittests for the destroy command."""
+
+    def test_destroy_command(self):
+        """Test the destroy command."""
+        # Assuming there is a BaseModel instance with ID '789'
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 789"))
+            destroy_output = output.getvalue().strip()
+            self.assertEqual("", destroy_output)
+
+    def test_destroy_invalid_class(self):
+        """Test destroy command with an invalid class."""
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("destroy InvalidClass 789"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** class doesn't exist **", error_output)
+
+    def test_destroy_invalid_id(self):
+        """Test destroy command with an invalid ID."""
+        # Assuming there is no BaseModel instance with ID '101'
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 101"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** no instance found **", error_output)
+
 if __name__ == "__main__":
     unittest.main()
