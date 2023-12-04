@@ -124,7 +124,15 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
                 self.assertFalse(self.hbnb_cmd.onecmd(command))
                 self.assertEqual(expected_output, output.getvalue().strip())
 
-    
+    def test_create_objects(self):
+        classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+
+        for class_name in classes:
+            with patch("sys.stdout", new=StringIO()) as output:
+                self.assertFalse(self.hbnb_cmd.onecmd(f"create {class_name}"))
+                self.assertLess(0, len(output.getvalue().strip()))
+                test_key = f"{class_name}.{output.getvalue().strip()}"
+                self.assertIn(test_key, storage.all().keys())
 
 
 class TestHBNBCommandShow(HBNBCommandTestCase):
