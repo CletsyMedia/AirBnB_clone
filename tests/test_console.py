@@ -126,9 +126,9 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
 
     def test_create_objects(self):
         classes = [
-        "BaseModel", "User", "State", "City",
-        "Amenity", "Place", "Review"
-    ]
+            "BaseModel", "User", "State", "City",
+            "Amenity", "Place", "Review"
+        ]
 
         for class_name in classes:
             with patch("sys.stdout", new=StringIO()) as output:
