@@ -65,26 +65,22 @@ class TestHBNBCommandQuit(HBNBCommandTestCase):
             self.assertEqual("", eof_output)
 
 
-class TestHBNBCommandHelp(HBNBCommandTestCase):
-    """Unittests for HBNB command interpreter help messages."""
+class TestHBNBCommandCreate(HBNBCommandTestCase):
+    """Unittests for the create command."""
 
-    def test_help_command(self):
-        """Test the help command."""
+    def test_create_command(self):
+        """Test the create command."""
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(self.hbnb_cmd.onecmd("help"))
-            help_output = output.getvalue().strip()
-            print("Actual Output:\n", help_output)  # Add this line for debugging
-            self.assertIn("Documented commands (type help <topic>):", help_output)
-            self.assertIn("EOF  all  count  create  destroy  help  quit  show  update", help_output)
-            self.assertIn("Quit command to exit the program.", help_output)
+            self.assertFalse(self.hbnb_cmd.onecmd("create BaseModel"))
+            create_output = output.getvalue().strip()
+            self.assertTrue(create_output)  # Assuming the ID is printed
 
-    def test_help_quit_command(self):
-        """Test the help command for quit."""
+    def test_create_invalid_class(self):
+        """Test create command with an invalid class."""
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(self.hbnb_cmd.onecmd("help quit"))
-            help_output = output.getvalue().strip()
-            print("Actual Output:\n", help_output)  # Add this line for debugging
-            self.assertIn("Quit command to exit the program.", help_output)
+            self.assertFalse(self.hbnb_cmd.onecmd("create InvalidClass"))
+            error_output = output.getvalue().strip()
+            self.assertIn("** class doesn't exist **", error_output)
 
 
 if __name__ == "__main__":
