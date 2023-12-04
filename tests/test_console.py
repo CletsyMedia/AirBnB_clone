@@ -125,6 +125,18 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
                 self.assertEqual(expected_output, output.getvalue().strip())
 
     def test_create_objects(self):
+        """Test the 'create' command for multiple classes.
+
+        This test ensures that the 'create' command correctly creates objects
+        for each specified class and that the created objects are stored in
+        the storage engine.
+
+        It iterates over a list of class names, executes the 'create' command
+        for each class, and verifies that the expected object key is present
+        in the storage engine.
+
+        Classes tested: BaseModel, User, State, City, Amenity, Place, Review.
+        """
         classes = [
             "BaseModel", "User", "State", "City",
             "Amenity", "Place", "Review"
