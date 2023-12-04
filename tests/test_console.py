@@ -266,6 +266,29 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
             error_output = output.getvalue().strip()
             self.assertIn("** class does not exist **", error_output)
 
+    def test_all_objects_space_notation(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("create BaseModel"))
+            self.assertFalse(self.hbnb_cmd.onecmd("create User"))
+            self.assertFalse(self.hbnb_cmd.onecmd("create State"))
+            self.assertFalse(self.hbnb_cmd.onecmd("create Place"))
+            self.assertFalse(self.hbnb_cmd.onecmd("create City"))
+            self.assertFalse(self.hbnb_cmd.onecmd("create Amenity"))
+            self.assertFalse(self.hbnb_cmd.onecmd("create Review"))
+
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("all"))
+            output_lns = output.getvalue().strip().split('\n')
+
+        # Check if each class name is present in at least one line
+        classes_to_check = [
+            "BaseModel", "User", "State", "City",
+            "Amenity", "Place", "Review"
+        ]
+        for clsas in classes_to_check:
+            err_msg = f"{clsas} not found in {output_lns}"
+            self.assertTrue(any(clsas in line for line in output_lns), err_msg)
+
 
 class TestHBNBCommandDestroy(HBNBCommandTestCase):
     """Unittests for the destroy command."""
