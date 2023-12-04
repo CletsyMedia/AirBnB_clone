@@ -125,7 +125,10 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
                 self.assertEqual(expected_output, output.getvalue().strip())
 
     def test_create_objects(self):
-        classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+        classes = [
+        "BaseModel", "User", "State", "City",
+        "Amenity", "Place", "Review"
+    ]
 
         for class_name in classes:
             with patch("sys.stdout", new=StringIO()) as output:
