@@ -184,49 +184,47 @@ class HBNBCommand(command.Cmd):
         <class>.update(<id>, <dictionary>)
         Update a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary."""
-        argl = parse(arg)
+        arglen = parse(arg)
         objdict = storage.all()
 
-        if len(argl) < 4:
-            print("** Missing arguments. See help update **")
+        if len(arglen) == 0:
+            print("** class name missing **")
             return False
-
-        class_name, obj_id, attr_name, attr_value = argl
-
-        if class_name not in HBNBCommand.__classes:
-            print("** Class doesn't exist **")
+        if arglen[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
             return False
-
-        key = "{}.{}".format(class_name, obj_id)
-        if key not in objdict:
-            print("** No instance found **")
+        if len(arglen) == 1:
+            print("** instance id missing **")
             return False
-
-        obj = objdict[key]
-
-        # Single attribute update
-        if len(argl) == 4:
+        if "{}.{}".format(arglen[0], arglen[1]) not in objdict.keys():
+            print("** no instance found **")
+            return False
+        if len(arglen) == 2:
+            print("** attribute name missing **")
+            return False
+        if len(arglen) == 3:
             try:
-                setattr(obj, attr_name, eval(attr_value))
-            except AttributeError:
-                print("** Attribute doesn't exist **")
+                type(eval(arglen[2])) != dict
+            except NameError:
+                print("** value missing **")
                 return False
 
-        # Dictionary update
-        elif len(argl) == 5 and attr_name == "{":
-            try:
-                attr_dict = eval(attr_value)
-                if not isinstance(attr_dict, dict):
-                    raise ValueError
-                for key, val in attr_dict.items():
-                    setattr(obj, key, val)
-            except (SyntaxError, ValueError):
-                print("** Invalid dictionary format **")
-                return False
-        else:
-            print("** Invalid arguments. See help update **")
-            return False
-
+        if len(arglen) == 4:
+            obj = objdict["{}.{}".format(arglen[0], arglen[1])]
+            if arglen[2] in obj.__class__.__dict__.keys():
+                val_type = type(obj.__class__.__dict__[arglen[2]])
+                obj.__dict__[arglen[2]] = val_type(arglen[3])
+            else:
+                obj.__dict__[arglen[2]] = arglen[3]
+        elif type(eval(arglen[2])) == dict:
+            obj = objdict["{}.{}".format(arglen[0], arglen[1])]
+            for k, v in eval(arglen[2]).items():
+                if (k in obj.__class__.__dict__.keys() and
+                        type(obj.__class__.__dict__[k]) in {str, int, float}):
+                    val_type = type(obj.__class__.__dict__[k])
+                    obj.__dict__[k] = val_type(v)
+                else:
+                    obj.__dict__[k] = v
         storage.save()
 
 
