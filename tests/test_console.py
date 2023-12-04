@@ -150,18 +150,21 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
     def test_update_command(self):
         """Test the update command."""
         # Assuming there is a BaseModel instance with ID '999'
+        update_cmd = "update BaseModel 999 name 'new_name'"
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(self.hbnb_cmd.onecmd("update BaseModel 999 name 'new_name'"))
+            self.assertFalse(self.hbnb_cmd.onecmd(update_cmd))
             update_output = output.getvalue().strip()
             self.assertEqual("** no instance found **", update_output)
 
     def test_update_invalid_attribute(self):
         """Test update command with an invalid attribute."""
         # Assuming there is a BaseModel instance with ID '103'
+        update_cmd = "update BaseModel 103 invalid_attribute 'new_value'"
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(self.hbnb_cmd.onecmd("update BaseModel 103 invalid_attribute 'new_value'"))
+            self.assertFalse(self.hbnb_cmd.onecmd(update_cmd))
             error_output = output.getvalue().strip()
             self.assertIn("** no instance found **", error_output)
+
 
 
 if __name__ == "__main__":
