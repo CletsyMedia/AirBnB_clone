@@ -166,6 +166,5 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
             self.assertIn("** no instance found **", error_output)
 
 
-
 if __name__ == "__main__":
     unittest.main()
