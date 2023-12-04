@@ -152,6 +152,29 @@ class TestHBNBCommandCreate(HBNBCommandTestCase):
 
 class TestHBNBCommandShow(HBNBCommandTestCase):
     """Unittests for the show command."""
+    
+    @classmethod
+    def setUpClass(cls):
+        """Set up class-level resources."""
+        # Perform setup actions, e.g., rename file.json to tmp and clear objts
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+        FileStorage.__objects = {}
+
+    @classmethod
+    def tearDownClass(cls):
+        """Tear down class-level resources."""
+        # Perform teardown actions, e.g., remove file.json and rename tmp back
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
 
     def test_show_invalid_class(self):
         """Test show command with an invalid class."""
@@ -169,6 +192,23 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
             error_output = output.getvalue().strip()
             self.assertIn("** no instance can be found **",
                           error_output)  # Update this line
+
+    def test_show_id_space_notation(self):
+        """Test show command with ID in space notation."""
+        # Assuming there is a BaseModel instance with ID '123'
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel 1 2 3"))
+            show_output = output.getvalue().strip()
+            self.assertTrue(show_output) 
+    
+    def test_show_dot_notation(self):
+        """Test show command with dot notation."""
+        # Assuming there is a BaseModel instance with ID '123'
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel.123"))
+            show_output = output.getvalue().strip()
+            self.assertTrue(show_output)
+
 
 
 class TestHBNBCommandAll(HBNBCommandTestCase):
