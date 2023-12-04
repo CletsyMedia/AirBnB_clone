@@ -49,7 +49,6 @@ class HBNBCommand(cmd.Cmd):
         "User"
     }
 
-
     def emptyline(self):
         """Do nothing when receiving an empty line."""
         pass
@@ -156,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             del objdictionary["{}.{}".format(arglen[0], arglen[1])]
             storage.save()
-   
+
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
         Display string representations of all instances of a given class.
@@ -172,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
                 elif len(arglen) == 0:
                     objlen.append(obj.__str__())
             print(objlen)
-  
+
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
         Retrieve the number of instances of a given class."""
@@ -231,6 +230,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     obj.__dict__[k] = v
         storage.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
