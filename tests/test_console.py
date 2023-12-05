@@ -400,7 +400,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("BaseModel.destroy()"))
             error_output = output.getvalue().strip()
-            self.assertIn("** instance id is missing **", error_output)
+            self.assertIn("** instance id missing **", error_output)
 
     def test_destroy_invalid_id_space_notation(self):
         """Test destroy command with invalid ID and space notation."""

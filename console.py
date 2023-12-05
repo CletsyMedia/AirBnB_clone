@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         elif arglen[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arglen) == 1:
-            print("** instance id is missing **")
+            print("** instance id missing **")
         elif "{}.{}".format(arglen[0], arglen[1]) not in objdictionary:
             print("** no instance found **")
         else:
@@ -149,7 +149,7 @@ class HBNBCommand(cmd.Cmd):
         elif arglen[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arglen) == 1:
-            print("** instance id is missing **")
+            print("** instance id missing **")
         elif "{}.{}".format(arglen[0], arglen[1]) not in objdictionary.keys():
             print("** no instance found **")
         else:
