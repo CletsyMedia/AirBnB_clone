@@ -1,11 +1,16 @@
 #!/usr/bin/python3
 """Defines unittests for models/city.py.
 
+This module contains a series of unittest classes to test the functionality
+of the HBNB console. Each unittest class focuses on specific aspects of the
+console's behavior.
+
 Unittest classes:
-    TestCity_instantiation
-    TestCity_save
-    TestCity_to_dict
+    TestCityInstantiation
+    TestCitySave
+    TestCityDict
 """
+from console import HBNBCommand
 import os
 import models
 import unittest
@@ -14,7 +19,15 @@ from time import sleep
 from models.city import City
 
 
-class TestCity_instantiation(unittest.TestCase):
+class HBNBCommandTestCase(unittest.TestCase):
+    """Base class for HBNBCommand unittests."""
+
+    def setUp(self):
+        """Set up HBNBCommand instance for testing."""
+        self.hbnb_cmd = HBNBCommand()
+
+
+class TestCityInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the City class."""
 
     def test_no_args_instantiates(self):
@@ -90,7 +103,7 @@ class TestCity_instantiation(unittest.TestCase):
             City(id=None, created_at=None, updated_at=None)
 
 
-class TestCity_save(unittest.TestCase):
+class TestCitySave(HBNBCommandTestCase):
     """Unittests for testing save method of the City class."""
 
     @classmethod
@@ -141,7 +154,7 @@ class TestCity_save(unittest.TestCase):
             self.assertIn(cyid, f.read())
 
 
-class TestCity_to_dict(unittest.TestCase):
+class TestCityDict(HBNBCommandTestCase):
     """Unittests for testing to_dict method of the City class."""
 
     def test_to_dict_type(self):
