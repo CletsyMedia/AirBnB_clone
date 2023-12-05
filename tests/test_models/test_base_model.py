@@ -47,11 +47,11 @@ class TestBaseModelInstantiation(HBNBCommandTestCase):
 
     def test_instantiation_with_args_and_kwargs(self):
         dateT = datetime.today()
-        date_iso = dateT.isoformat()
-        baseModel = BaseModel("12", id="345", created_at=date_iso, updated_at=date_iso)
-        self.assertEqual(baseModel.id, "345")
-        self.assertEqual(baseModel.created_at, dateT)
-        self.assertEqual(baseModel.updated_at, dateT)
+        dt_iso = dateT.isoformat()
+        baseM = BaseModel("12", id="345", created_at=dt_iso, updated_at=dt_iso)
+        self.assertEqual(baseM.id, "345")
+        self.assertEqual(baseM.created_at, dateT)
+        self.assertEqual(baseM.updated_at, dateT)
 
     def test_id_is_public_str(self):
         self.assertEqual(str, type(BaseModel().id))
@@ -86,8 +86,8 @@ class TestBaseModelInstantiation(HBNBCommandTestCase):
 
     def test_instantiation_with_kwargs(self):
         dateT = datetime.today()
-        date_iso = dateT.isoformat()
-        baseModel = BaseModel(id="345", created_at=date_iso, updated_at=date_iso)
+        dt_iso = dateT.isoformat()
+        baseModel = BaseModel(id="345", created_at=dt_iso, updated_at=dt_iso)
         self.assertEqual(baseModel.id, "345")
         self.assertEqual(baseModel.created_at, dateT)
         self.assertEqual(baseModel.updated_at, dateT)
@@ -197,4 +197,3 @@ class TestBaseModelDict(HBNBCommandTestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    
