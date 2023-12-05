@@ -47,7 +47,7 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
         self.assertEqual(str, type(pl.user_id))
         self.assertIn("user_id", dir(pl))
         self.assertNotIn("user_id", pl.__dict__)
-    
+
     def test_no_args_instantiates(self):
         self.assertEqual(Place, type(Place()))
 
@@ -56,7 +56,7 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
 
     def test_id_is_public_str(self):
         self.assertEqual(str, type(Place().id))
-        
+
     def test_name_is_public_class_attribute(self):
         pl = Place()
         self.assertEqual(str, type(pl.name))
