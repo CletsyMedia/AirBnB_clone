@@ -83,6 +83,18 @@ class TestAmenityInstantiation(HBNBCommandTestCase):
         amenity2 = Amenity()
         self.assertLess(amenity1.created_at, amenity2.created_at)
 
+    def test_instantiation_with_kwargs(self):
+        """instantiation with kwargs test method"""
+        dateT = datetime.today()
+        date_iso = dateT.isoformat()
+        amenity = Amenity(id="345", created_at=date_iso, updated_at=date_iso)
+        self.assertEqual(amenity.id, "345")
+        self.assertEqual(amenity.created_at, dateT)
+        self.assertEqual(amenity.updated_at, dateT)
+
+    def test_instantiation_with_None_kwargs(self):
+        with self.assertRaises(TypeError):
+            Amenity(id=None, created_at=None, updated_at=None)
 
 if __name__ == "__main__":
     unittest.main()
