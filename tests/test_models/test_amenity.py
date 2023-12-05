@@ -47,22 +47,22 @@ class TestAmenity_save(unittest.TestCase):
             pass
 
     def test_one_save(self):
-        am = Amenity()
+        amenity = Amenity()
         sleep(0.05)
-        first_updated_at = am.updated_at
-        am.save()
-        self.assertLess(first_updated_at, am.updated_at)
+        first_updated_at = amenity.updated_at
+        amenity.save()
+        self.assertLess(first_updated_at, amenity.updated_at)
 
     def test_two_saves(self):
-        am = Amenity()
+        amenity = Amenity()
         sleep(0.05)
-        first_updated_at = am.updated_at
-        am.save()
-        second_updated_at = am.updated_at
+        first_updated_at = amenity.updated_at
+        amenity.save()
+        second_updated_at = amenity.updated_at
         self.assertLess(first_updated_at, second_updated_at)
         sleep(0.05)
-        am.save()
-        self.assertLess(second_updated_at, am.updated_at)
+        amenity.save()
+        self.assertLess(second_updated_at, amenity.updated_at)
 
 class TestAmenityInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Amenity class."""
