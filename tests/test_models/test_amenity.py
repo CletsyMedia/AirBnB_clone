@@ -17,7 +17,14 @@ from time import sleep
 from models.amenity import Amenity
 
 
-class TestAmenityInstantiation(unittest.TestCase):
+class HBNBCommandTestCase(unittest.TestCase):
+    """Base class for HBNBCommand unittests."""
+
+    def setUp(self):
+        """Set up HBNBCommand instance for testing."""
+        self.hbnb_cmd = HBNBCommand()
+
+class TestAmenityInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Amenity class."""
 
     def test_created_at_is_public_datetime(self):
