@@ -200,6 +200,12 @@ class TestPlaceSave(HBNBCommandTestCase):
         with self.assertRaises(TypeError):
             pl.save(None)
 
+    def test_save_updates_file(self):
+        pl = Place()
+        pl.save()
+        plid = "Place." + pl.id
+        with open("file.json", "r") as f:
+            self.assertIn(plid, f.read())
 
 if __name__ == "__main__":
     unittest.main()
