@@ -128,7 +128,17 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
         pl2 = Place()
         self.assertLess(pl1.updated_at, pl2.updated_at)
 
-
+    def test_str_representation(self):
+        dt = datetime.today()
+        dt_repr = repr(dt)
+        pl = Place()
+        pl.id = "123456"
+        pl.created_at = pl.updated_at = dt
+        plstr = pl.__str__()
+        self.assertIn("[Place] (123456)", plstr)
+        self.assertIn("'id': '123456'", plstr)
+        self.assertIn("'created_at': " + dt_repr, plstr)
+        self.assertIn("'updated_at': " + dt_repr, plstr)
 
 if __name__ == "__main__":
     unittest.main()
