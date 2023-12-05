@@ -27,8 +27,26 @@ class HBNBCommandTestCase(unittest.TestCase):
         self.hbnb_cmd = HBNBCommand()
 
 
-class TestReview_instantiation(HBNBCommandTestCase):
+class TestReviewInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Review class."""
+
+    def test_new_instance_stored_in_objects(self):
+        self.assertIn(Review(), models.storage.all().values())
+
+    def test_id_is_public_str(self):
+        self.assertEqual(str, type(Review().id))
+
+    def test_created_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(Review().created_at))
+
+    def test_updated_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(Review().updated_at))
+
+    def test_place_id_is_public_class_attribute(self):
+        rv = Review()
+        self.assertEqual(str, type(rv.place_id))
+        self.assertIn("place_id", dir(rv))
+        self.assertNotIn("place_id", rv.__dict__)
 
     def test_no_args_instantiates(self):
         self.assertEqual(Review, type(Review()))
