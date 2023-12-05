@@ -157,7 +157,7 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
             Place(id=None, created_at=None, updated_at=None)
 
 
-class TestPlace_save(HBNBCommandTestCase):
+class TestPlaceSave(HBNBCommandTestCase):
     """Unittests for testing save method of the Place class."""
 
     @classmethod
@@ -176,6 +176,29 @@ class TestPlace_save(HBNBCommandTestCase):
             os.rename("tmp", "file.json")
         except IOError:
             pass
+
+    def test_one_save(self):
+        pl = Place()
+        sleep(0.05)
+        first_updated_at = pl.updated_at
+        pl.save()
+        self.assertLess(first_updated_at, pl.updated_at)
+
+    def test_two_saves(self):
+        pl = Place()
+        sleep(0.05)
+        first_updated_at = pl.updated_at
+        pl.save()
+        second_updated_at = pl.updated_at
+        self.assertLess(first_updated_at, second_updated_at)
+        sleep(0.05)
+        pl.save()
+        self.assertLess(second_updated_at, pl.updated_at)
+
+    def test_save_with_arg(self):
+        pl = Place()
+        with self.assertRaises(TypeError):
+            pl.save(None)
 
 
 if __name__ == "__main__":
