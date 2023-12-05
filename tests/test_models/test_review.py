@@ -109,6 +109,55 @@ class TestReviewInstantiation(HBNBCommandTestCase):
             Review(id=None, created_at=None, updated_at=None)
 
 
+class TestReviewSave(HBNBCommandTestCase):
+    """Unittests for testing save method of the Review class."""
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_one_save(self):
+        rv = Review()
+        sleep(0.05)
+        first_updated_at = rv.updated_at
+        rv.save()
+        self.assertLess(first_updated_at, rv.updated_at)
+
+    def test_two_saves(self):
+        rv = Review()
+        sleep(0.05)
+        first_updated_at = rv.updated_at
+        rv.save()
+        second_updated_at = rv.updated_at
+        self.assertLess(first_updated_at, second_updated_at)
+        sleep(0.05)
+        rv.save()
+        self.assertLess(second_updated_at, rv.updated_at)
+
+    def test_save_with_arg(self):
+        rv = Review()
+        with self.assertRaises(TypeError):
+            rv.save(None)
+
+    def test_save_updates_file(self):
+        rv = Review()
+        rv.save()
+        rvid = "Review." + rv.id
+        with open("file.json", "r") as f:
+            self.assertIn(rvid, f.read())
 
 
 
