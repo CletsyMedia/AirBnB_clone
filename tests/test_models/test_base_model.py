@@ -41,6 +41,18 @@ class TestBaseModelInstantiation(HBNBCommandTestCase):
         baseModel2 = BaseModel()
         self.assertLess(baseModel1.created_at, baseModel2.created_at)
 
+    def test_instantiation_with_None_kwargs(self):
+        with self.assertRaises(TypeError):
+            BaseModel(id=None, created_at=None, updated_at=None)
+
+    def test_instantiation_with_args_and_kwargs(self):
+        dateT = datetime.today()
+        date_iso = dateT.isoformat()
+        baseModel = BaseModel("12", id="345", created_at=date_iso, updated_at=date_iso)
+        self.assertEqual(baseModel.id, "345")
+        self.assertEqual(baseModel.created_at, dateT)
+        self.assertEqual(baseModel.updated_at, dateT)
+
     def test_id_is_public_str(self):
         self.assertEqual(str, type(BaseModel().id))
 
