@@ -26,6 +26,44 @@ class HBNBCommandTestCase(unittest.TestCase):
         self.hbnb_cmd = HBNBCommand()
 
 
+class TestAmenity_save(unittest.TestCase):
+    """Unittests for testing save method of the Amenity class."""
+
+    @classmethod
+    def setUp(cls):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    def tearDown(cls):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_one_save(self):
+        am = Amenity()
+        sleep(0.05)
+        first_updated_at = am.updated_at
+        am.save()
+        self.assertLess(first_updated_at, am.updated_at)
+
+    def test_two_saves(self):
+        am = Amenity()
+        sleep(0.05)
+        first_updated_at = am.updated_at
+        am.save()
+        second_updated_at = am.updated_at
+        self.assertLess(first_updated_at, second_updated_at)
+        sleep(0.05)
+        am.save()
+        self.assertLess(second_updated_at, am.updated_at)
+
 class TestAmenityInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Amenity class."""
 
