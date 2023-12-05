@@ -116,6 +116,19 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
         pl2 = Place()
         self.assertNotEqual(pl1.id, pl2.id)
 
+    def test_two_places_different_created_at(self):
+        pl1 = Place()
+        sleep(0.05)
+        pl2 = Place()
+        self.assertLess(pl1.created_at, pl2.created_at)
+
+    def test_two_places_different_updated_at(self):
+        pl1 = Place()
+        sleep(0.05)
+        pl2 = Place()
+        self.assertLess(pl1.updated_at, pl2.updated_at)
+
+
 
 if __name__ == "__main__":
     unittest.main()
