@@ -459,6 +459,12 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
             self.assertEqual("** class doesn't exist **",
                              output.getvalue().strip())
 
+    def test_update_missing_id(self):
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(self.hbnb_cmd.onecmd("update BaseModel"))
+            self.assertEqual("** instance id missing **",
+                             output.getvalue().strip())
+
 
 if __name__ == "__main__":
     unittest.main()
