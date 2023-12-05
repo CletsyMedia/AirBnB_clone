@@ -41,7 +41,7 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
         self.assertEqual(str, type(pl.city_id))
         self.assertIn("city_id", dir(pl))
         self.assertNotIn("city_id", pl.__dict__)
-        
+
     def test_user_id_is_public_class_attribute(self):
         pl = Place()
         self.assertEqual(str, type(pl.user_id))
@@ -74,6 +74,43 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
         self.assertEqual(int, type(pl.number_rooms))
         self.assertIn("number_rooms", dir(pl))
         self.assertNotIn("number_rooms", pl.__dict__)
+
+    def test_number_bathrooms_is_public_class_attribute(self):
+        pl = Place()
+        self.assertEqual(int, type(pl.number_bathrooms))
+        self.assertIn("number_bathrooms", dir(pl))
+        self.assertNotIn("number_bathrooms", pl.__dict__)
+
+    def test_max_guest_is_public_class_attribute(self):
+        pl = Place()
+        self.assertEqual(int, type(pl.max_guest))
+        self.assertIn("max_guest", dir(pl))
+        self.assertNotIn("max_guest", pl.__dict__)
+
+    def test_price_by_night_is_public_class_attribute(self):
+        pl = Place()
+        self.assertEqual(int, type(pl.price_by_night))
+        self.assertIn("price_by_night", dir(pl))
+        self.assertNotIn("price_by_night", pl.__dict__)
+
+    def test_latitude_is_public_class_attribute(self):
+        pl = Place()
+        self.assertEqual(float, type(pl.latitude))
+        self.assertIn("latitude", dir(pl))
+        self.assertNotIn("latitude", pl.__dict__)
+
+    def test_longitude_is_public_class_attribute(self):
+        pl = Place()
+        self.assertEqual(float, type(pl.longitude))
+        self.assertIn("longitude", dir(pl))
+        self.assertNotIn("longitude", pl.__dict__)
+
+    def test_amenity_ids_is_public_class_attribute(self):
+        pl = Place()
+        self.assertEqual(list, type(pl.amenity_ids))
+        self.assertIn("amenity_ids", dir(pl))
+        self.assertNotIn("amenity_ids", pl.__dict__)
+
 
 if __name__ == "__main__":
     unittest.main()
