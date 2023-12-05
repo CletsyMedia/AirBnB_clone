@@ -91,3 +91,105 @@ class TestBaseModelInstantiation(HBNBCommandTestCase):
         self.assertEqual(baseModel.id, "345")
         self.assertEqual(baseModel.created_at, dateT)
         self.assertEqual(baseModel.updated_at, dateT)
+
+
+class TestBaseModelSave(HBNBCommandTestCase):
+    """Unittests for testing save method of the BaseModel class."""
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_one_save(self):
+        baseModel = BaseModel()
+        sleep(0.05)
+        first_updated_at = baseModel.updated_at
+        baseModel.save()
+        self.assertLess(first_updated_at, baseModel.updated_at)
+
+    def test_two_saves(self):
+        baseModel = BaseModel()
+        sleep(0.05)
+        first_updated_at = baseModel.updated_at
+        baseModel.save()
+        second_updated_at = baseModel.updated_at
+        self.assertLess(first_updated_at, second_updated_at)
+        sleep(0.05)
+        baseModel.save()
+        self.assertLess(second_updated_at, baseModel.updated_at)
+
+    def test_save_with_arg(self):
+        baseModel = BaseModel()
+        with self.assertRaises(TypeError):
+            baseModel.save(None)
+
+    def test_save_updates_file(self):
+        baseModel = BaseModel()
+        baseModel.save()
+        baseModel_id = "BaseModel." + baseModel.id
+        with open("file.json", "r") as f:
+            self.assertIn(baseModel_id, f.read())
+
+
+class TestBaseModelDict(HBNBCommandTestCase):
+    """Unittests for testing dict method of the BaseModel class."""
+
+    def test_to_dict_type(self):
+        baseModel = BaseModel()
+        self.assertTrue(dict, type(baseModel.to_dict()))
+
+    def test_to_dict_contains_correct_keys(self):
+        baseModel = BaseModel()
+        self.assertIn("id", baseModel.to_dict())
+        self.assertIn("created_at", baseModel.to_dict())
+        self.assertIn("updated_at", baseModel.to_dict())
+        self.assertIn("__class__", baseModel.to_dict())
+
+    def test_to_dict_contains_added_attributes(self):
+        baseModel = BaseModel()
+        baseModel.name = "Holberton"
+        baseModel.my_number = 98
+        self.assertIn("name", baseModel.to_dict())
+        self.assertIn("my_number", baseModel.to_dict())
+
+    def test_to_dict_datetime_attributes_are_strs(self):
+        baseModel = BaseModel()
+        bm_dict = baseModel.to_dict()
+        self.assertEqual(str, type(bm_dict["created_at"]))
+        self.assertEqual(str, type(bm_dict["updated_at"]))
+
+    def test_to_dict_output(self):
+        dt = datetime.today()
+        baseModel = BaseModel()
+        baseModel.id = "123456"
+        baseModel.created_at = baseModel.updated_at = dt
+        tdict = {
+            'id': '123456',
+            '__class__': 'BaseModel',
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat()
+        }
+        self.assertDictEqual(baseModel.to_dict(), tdict)
+
+    def test_contrast_to_dict_dunder_dict(self):
+        bm = BaseModel()
+        self.assertNotEqual(bm.to_dict(), bm.__dict__)
+
+    def test_to_dict_with_arg(self):
+        bm = BaseModel()
+        with self.assertRaises(TypeError):
+            bm.to_dict(None)
