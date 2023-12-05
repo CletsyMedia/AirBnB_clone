@@ -30,6 +30,18 @@ class HBNBCommandTestCase(unittest.TestCase):
 class TestPlaceInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Place class."""
 
+    def test_created_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(Place().created_at))
+
+    def test_updated_at_is_public_datetime(self):
+        self.assertEqual(datetime, type(Place().updated_at))
+
+    # def test_city_id_is_public_class_attribute(self):
+    #     pl = Place()
+    #     self.assertEqual(str, type(Place.city_id))
+    #     self.assertIn("city_id", dir(pl))
+    #     self.assertNotIn("city_id", pl.__dict__)
+    
     def test_no_args_instantiates(self):
         self.assertEqual(Place, type(Place()))
 
