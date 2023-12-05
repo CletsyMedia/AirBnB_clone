@@ -10,13 +10,13 @@ Unittest classes:
     TestPlaceSave
     TestPlaceDict
 """
-from datetime import datetime
-import unittest
-import models
-import os
-from time import sleep
-from models.place import Place
 from console import HBNBCommand
+import os
+import models
+import unittest
+from models.place import Place
+from datetime import datetime
+from time import sleep
 
 
 class HBNBCommandTestCase(unittest.TestCase):
@@ -27,7 +27,7 @@ class HBNBCommandTestCase(unittest.TestCase):
         self.hbnb_cmd = HBNBCommand()
 
 
-class TestPlace_instantiation(unittest.TestCase):
+class TestPlaceInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Place class."""
 
     def test_no_args_instantiates(self):
