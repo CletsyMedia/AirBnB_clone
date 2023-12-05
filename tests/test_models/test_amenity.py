@@ -26,7 +26,7 @@ class HBNBCommandTestCase(unittest.TestCase):
         self.hbnb_cmd = HBNBCommand()
 
 
-class TestAmenity_save(unittest.TestCase):
+class TestAmenitySave(HBNBCommandTestCase):
     """Unittests for testing save method of the Amenity class."""
 
     @classmethod
@@ -63,6 +63,7 @@ class TestAmenity_save(unittest.TestCase):
         sleep(0.05)
         amenity.save()
         self.assertLess(second_updated_at, amenity.updated_at)
+
 
 class TestAmenityInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Amenity class."""
@@ -133,6 +134,7 @@ class TestAmenityInstantiation(HBNBCommandTestCase):
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             Amenity(id=None, created_at=None, updated_at=None)
+
 
 if __name__ == "__main__":
     unittest.main()
