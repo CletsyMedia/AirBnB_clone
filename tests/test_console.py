@@ -378,7 +378,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy"))
             error_output = output.getvalue().strip()
-            self.assertIn("** class name is missing **", error_output)
+            self.assertIn("** class name missing **", error_output)
 
     def test_destroy_invalid_class(self):
         """Test destroy command with an invalid class."""
