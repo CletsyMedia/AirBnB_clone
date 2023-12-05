@@ -77,6 +77,56 @@ class TestAmenitySave(HBNBCommandTestCase):
         self.assertLess(second_updated_at, amenity.updated_at)
 
 
+class TestAmenityDict(HBNBCommandTestCase):
+    """Unittests for testing to_dict method of the Amenity class."""
+
+    def test_to_dict_type(self):
+        self.assertTrue(dict, type(Amenity().to_dict()))
+
+    def test_to_dict_contains_correct_keys(self):
+        amenity = Amenity()
+        self.assertIn("id", amenity.to_dict())
+        self.assertIn("created_at", amenity.to_dict())
+        self.assertIn("updated_at", amenity.to_dict())
+        self.assertIn("__class__", amenity.to_dict())
+
+    def test_to_dict_contains_added_attributes(self):
+        amenity = Amenity()
+        amenity.middle_name = "Holberton"
+        amenity.my_number = 98
+        self.assertEqual("Holberton", amenity.middle_name)
+        self.assertIn("my_number", amenity.to_dict())
+
+    def test_to_dict_datetime_attributes_are_strs(self):
+        amenity = Amenity()
+        am_dict = amenity.to_dict()
+        self.assertEqual(str, type(am_dict["id"]))
+        self.assertEqual(str, type(am_dict["created_at"]))
+        self.assertEqual(str, type(am_dict["updated_at"]))
+
+    def test_to_dict_output(self):
+        dateT = datetime.today()
+        amenity = Amenity()
+        amenity.id = "123456"
+        amenity.created_at = amenity.updated_at = dateT
+        tdict = {
+            'id': '123456',
+            '__class__': 'Amenity',
+            'created_at': dateT.isoformat(),
+            'updated_at': dateT.isoformat(),
+        }
+        self.assertDictEqual(amenity.to_dict(), tdict)
+
+    def test_contrast_to_dict_dunder_dict(self):
+        amenity = Amenity()
+        self.assertNotEqual(amenity.to_dict(), amenity.__dict__)
+
+    def test_to_dict_with_arg(self):
+        amenity = Amenity()
+        with self.assertRaises(TypeError):
+            amenity.to_dict(None)
+
+
 class TestAmenityInstantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the Amenity class."""
 
