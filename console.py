@@ -145,7 +145,7 @@ class HBNBCommand(cmd.Cmd):
         arglen = parse(arg)
         objdictionary = storage.all()
         if len(arglen) == 0:
-            print("** class name is missing **")
+            print("** class name missing **")
         elif arglen[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arglen) == 1:
