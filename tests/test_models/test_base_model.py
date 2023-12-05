@@ -193,3 +193,8 @@ class TestBaseModelDict(HBNBCommandTestCase):
         baseModel = BaseModel()
         with self.assertRaises(TypeError):
             baseModel.to_dict(None)
+
+
+if __name__ == "__main__":
+    unittest.main()
+    
