@@ -515,6 +515,5 @@ class TestHBNBCommandHelp(HBNBCommandTestCase):
             self.assertEqual(h, output.getvalue().strip())
 
 
-
 if __name__ == "__main__":
     unittest.main()
