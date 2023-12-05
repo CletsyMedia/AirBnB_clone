@@ -7,13 +7,13 @@ console's behavior.
 
 Unittest classes:
     - TestHBNBCommandPrompting: Tests for console prompting behavior.
-    - TestHBNBCommandHelp: Tests for console help command.
     - TestHBNBCommandExit: Tests for console exit command.
     - TestHBNBCommandCreate: Tests for console create command.
     - TestHBNBCommandShow: Tests for console show command.
     - TestHBNBCommandAll: Tests for console all command.
     - TestHBNBCommandDestroy: Tests for console destroy command.
     - TestHBNBCommandUpdate: Tests for console update command.
+    - TestHBNBCommandHelp: Tests for console help command.
 """
 import os
 import re as regexp
@@ -474,42 +474,49 @@ class TestHBNBCommandUpdate(HBNBCommandTestCase):
 
 class TestHBNBCommandHelp(HBNBCommandTestCase):
     """Unittests for the help command."""
-    
     def test_help(self):
-        help_msg = ("Documented commands (type help <topic>):\n"
-             "========================================\n"
-             "EOF  all  count  create  destroy  help  quit  show  update")
+        help_msg = (
+            "Documented commands (type help <topic>):\n"
+            "========================================\n"
+            "EOF  all  count  create  destroy  help  quit  show  update"
+        )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(help_msg, output.getvalue().strip())
-            
+
     def test_help_count(self):
-        help_msg = ("Usage: count <class> or <class>.count()\n        "
-             "Retrieve the number of instances of a given class.")
+        help_msg = (
+            "Usage: count <class> or <class>.count()\n"
+            "        Retrieve the number of instances of a given class."
+        )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help count"))
             self.assertEqual(help_msg, output.getvalue().strip())
-    
+
     def test_help_all(self):
-        help_msg = ("Usage: all or all <class> or <class>.all()\n        "
+        h = ("Usage: all or all <class> or <class>.all()\n        "
              "Display string representations of all instances of a given class"
              ".\n        If no class is specified, displays all instantiated "
              "objects.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
-            self.assertEqual(help_msg, output.getvalue().strip())
+            self.assertEqual(h, output.getvalue().strip())
 
     def test_help_destroy(self):
-        help_msg = ("Usage: destroy <class> <id> or <class>.destroy(<id>)\n        "
-             "Delete a class instance of a given id.")
+        help_msg = (
+            "Usage: destroy <class> <id> or <class>.destroy(<id>)\n        "
+            "Delete a class instance of a given id."
+        )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help destroy"))
             self.assertEqual(help_msg, output.getvalue().strip())
 
     def test_help_show(self):
-        help_msg = ("Usage: show <class> <id> or <class>.show(<id>)\n        "
-             "Display the string representation of a class instance of"
-             " a given id.")
+        help_msg = (
+            "Usage: show <class> <id> or <class>.show(<id>)\n        "
+            "Display the string representation of a class instance of"
+            " a given id."
+        )
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
             self.assertEqual(help_msg, output.getvalue().strip())
