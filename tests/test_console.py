@@ -182,7 +182,7 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("show InvalidClass 123"))
             error_output = output.getvalue().strip()
-            self.assertIn("** class does not exist **",
+            self.assertIn("** class doesn't exist **",
                           error_output)  # Update this line
 
     def test_show_invalid_id(self):
@@ -265,7 +265,7 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("all InvalidClass"))
             error_output = output.getvalue().strip()
-            self.assertIn("** class does not exist **", error_output)
+            self.assertIn("** class doesn't exist **", error_output)
 
     def test_all_objects_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:

@@ -104,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
         Usage: create <class>
 
         This method creates a new instance of the specified class and
-        prints its ID. If the class does not exist, it prints an
+        prints its ID. If the class doesn't exist, it prints an
         error message.
 
         Args:
@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arglen) == 0:
             print("** class name missing **")
         elif arglen[0] not in HBNBCommand.__classes:
-            print("** class does not exist **")
+            print("** class doesn't exist **")
         elif len(arglen) == 1:
             print("** instance id is missing **")
         elif "{}.{}".format(arglen[0], arglen[1]) not in objdictionary:
@@ -162,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
         If no class is specified, displays all instantiated objects."""
         arglen = parse(arg)
         if len(arglen) > 0 and arglen[0] not in HBNBCommand.__classes:
-            print("** class does not exist **")
+            print("** class doesn't exist **")
         else:
             objlen = []
             for obj in storage.all().values():
