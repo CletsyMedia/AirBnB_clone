@@ -160,7 +160,7 @@ class TestReviewSave(HBNBCommandTestCase):
             self.assertIn(rvid, f.read())
 
 
-class TestReviewDict(unittest.TestCase):
+class TestReviewDict(HBNBCommandTestCase):
     """Unittests for testing dict method of the Review class."""
 
     def test_to_dict_type(self):
