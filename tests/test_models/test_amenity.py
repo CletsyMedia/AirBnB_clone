@@ -50,6 +50,16 @@ class TestAmenityInstantiation(HBNBCommandTestCase):
     def test_new_instance_stored_in_objects(self):
         self.assertIn(Amenity(), models.storage.all().values())
 
+    def test_2_amenities_unique_ids(self):
+        amenity1 = Amenity()
+        amenity2 = Amenity()
+        self.assertNotEqual(amenity1.id, amenity2.id)
+
+    def test_2_amenities_different_created_at(self):
+        amenity1 = Amenity()
+        sleep(0.05)
+        amenity2 = Amenity()
+        self.assertLess(amenity1.created_at, amenity2.created_at)
 
 if __name__ == "__main__":
     unittest.main()
