@@ -53,6 +53,18 @@ class TestAmenitySave(HBNBCommandTestCase):
         amenity.save()
         self.assertLess(first_updated_at, amenity.updated_at)
 
+    def test_save_with_arg(self):
+        amenity = Amenity()
+        with self.assertRaises(TypeError):
+            amenity.save(None)
+
+    def test_save_updates_file(self):
+        amenity = Amenity()
+        amenity.save()
+        amid = "Amenity." + amenity.id
+        with open("file.json", "r") as f:
+            self.assertIn(amid, f.read())
+
     def test_two_saves(self):
         amenity = Amenity()
         sleep(0.05)
