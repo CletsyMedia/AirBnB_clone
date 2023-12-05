@@ -192,6 +192,7 @@ class TestStateDict(HBNBCommandTestCase):
         st = State()
         with self.assertRaises(TypeError):
             st.to_dict(None)
-  
+
+
 if __name__ == "__main__":
     unittest.main()
