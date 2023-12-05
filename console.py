@@ -135,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(arglen) == 1:
             print("** instance id is missing **")
         elif "{}.{}".format(arglen[0], arglen[1]) not in objdictionary:
-            print("** no instance can be found **")
+            print("** no instance found **")
         else:
             print(objdictionary["{}.{}".format(arglen[0], arglen[1])])
 
@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(arglen) == 1:
             print("** instance id is missing **")
         elif "{}.{}".format(arglen[0], arglen[1]) not in objdictionary.keys():
-            print("** no instance can be found **")
+            print("** no instance found **")
         else:
             del objdictionary["{}.{}".format(arglen[0], arglen[1])]
             storage.save()

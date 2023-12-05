@@ -191,7 +191,7 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel 456"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **",
+            self.assertIn("** no instance found **",
                           error_output)  # Update this line
 
     def test_show_id_space_notation(self):
@@ -216,7 +216,7 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel 789"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **", error_output)
+            self.assertIn("** no instance found **", error_output)
 
     def test_show_space_notation_no_instance_found(self):
         """Test show command with space notation and no instance found."""
@@ -224,11 +224,11 @@ class TestHBNBCommandShow(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("show BaseModel 1 0 1"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **", error_output)
+            self.assertIn("** no instance found **", error_output)
 
     def test_show_no_instance_found_dot_notation(self):
         """Test show command with dot notation and no instance found."""
-        correct = "** no instance can be found **"
+        correct = "** no instance found **"
 
         classes = [
             "BaseModel", "User", "State", "City",
@@ -363,7 +363,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 789"))
             destroy_output = output.getvalue().strip()
-            self.assertEqual("** no instance can be found **", destroy_output)
+            self.assertEqual("** no instance found **", destroy_output)
 
     def test_destroy_invalid_id(self):
         """Test destroy command with an invalid ID."""
@@ -371,7 +371,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 101"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **", error_output)
+            self.assertIn("** no instance found **", error_output)
 
     def test_destroy_miss_class(self):
         """Test destroy command with missing class."""
@@ -393,7 +393,7 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 123"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **", error_output)
+            self.assertIn("** no instance found **", error_output)
 
     def test_destroy_missing_dot_notation(self):
         """Test destroy command with missing dot notation."""
@@ -407,14 +407,14 @@ class TestHBNBCommandDestroy(HBNBCommandTestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("destroy BaseModel 1"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **", error_output)
+            self.assertIn("** no instance found **", error_output)
 
     def test_destroy_invalid_id_dot_notation(self):
         """Test destroy command with invalid ID and dot notation."""
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(self.hbnb_cmd.onecmd("BaseModel.destroy(1)"))
             error_output = output.getvalue().strip()
-            self.assertIn("** no instance can be found **", error_output)
+            self.assertIn("** no instance found **", error_output)
 
 
 class TestHBNBCommandUpdate(HBNBCommandTestCase):
