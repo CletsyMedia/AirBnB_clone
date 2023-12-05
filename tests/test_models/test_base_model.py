@@ -186,10 +186,10 @@ class TestBaseModelDict(HBNBCommandTestCase):
         self.assertDictEqual(baseModel.to_dict(), tdict)
 
     def test_contrast_to_dict_dunder_dict(self):
-        bm = BaseModel()
-        self.assertNotEqual(bm.to_dict(), bm.__dict__)
+        baseModel = BaseModel()
+        self.assertNotEqual(baseModel.to_dict(), baseModel.__dict__)
 
     def test_to_dict_with_arg(self):
-        bm = BaseModel()
+        baseModel = BaseModel()
         with self.assertRaises(TypeError):
-            bm.to_dict(None)
+            baseModel.to_dict(None)
