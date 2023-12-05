@@ -2,9 +2,9 @@
 """Defines unittests for models/state.py.
 
 Unittest classes:
-    TestState_instantiation
-    TestState_save
-    TestState_to_dict
+    TestStateInstantiation
+    TestStateSave
+    TestStateDict
 """
 import os
 import models
@@ -12,9 +12,18 @@ import unittest
 from datetime import datetime
 from time import sleep
 from models.state import State
+from console import HBNBCommand
 
 
-class TestState_instantiation(unittest.TestCase):
+class HBNBCommandTestCase(unittest.TestCase):
+    """Base class for HBNBCommand unittests."""
+
+    def setUp(self):
+        """Set up HBNBCommand instance for testing."""
+        self.hbnb_cmd = HBNBCommand()
+
+
+class TestState_instantiation(HBNBCommandTestCase):
     """Unittests for testing instantiation of the State class."""
 
     def test_no_args_instantiates(self):
