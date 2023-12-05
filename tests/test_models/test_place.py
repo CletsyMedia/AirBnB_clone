@@ -111,6 +111,11 @@ class TestPlaceInstantiation(HBNBCommandTestCase):
         self.assertIn("amenity_ids", dir(pl))
         self.assertNotIn("amenity_ids", pl.__dict__)
 
+    def test_two_places_unique_ids(self):
+        pl1 = Place()
+        pl2 = Place()
+        self.assertNotEqual(pl1.id, pl2.id)
+
 
 if __name__ == "__main__":
     unittest.main()
