@@ -39,10 +39,10 @@ class TestAmenityInstantiation(HBNBCommandTestCase):
         self.assertEqual(Amenity, type(Amenity()))
 
     def test_name_is_public_class_attribute(self):
-        am = Amenity()
+        amenity = Amenity()
         self.assertEqual(str, type(Amenity.name))
         self.assertIn("name", dir(Amenity()))
-        self.assertNotIn("name", am.__dict__)
+        self.assertNotIn("name", amenity.__dict__)
 
     def test_id_is_public_str(self):
         self.assertEqual(str, type(Amenity().id))
