@@ -50,6 +50,28 @@ class TestAmenityInstantiation(HBNBCommandTestCase):
     def test_new_instance_stored_in_objects(self):
         self.assertIn(Amenity(), models.storage.all().values())
 
+    def test_two_amenities_different_updated_at(self):
+        amenity1 = Amenity()
+        sleep(0.05)
+        amenity2 = Amenity()
+        self.assertLess(amenity1.updated_at, amenity2.updated_at)
+
+    def test_str_representation(self):
+        dateT = datetime.today()
+        date_repr = repr(dateT)
+        amenity = Amenity()
+        amenity.id = "123456"
+        amenity.created_at = amenity.updated_at = dateT
+        amenstr = amenity.__str__()
+        self.assertIn("[Amenity] (123456)", amenstr)
+        self.assertIn("'id': '123456'", amenstr)
+        self.assertIn("'created_at': " + date_repr, amenstr)
+        self.assertIn("'updated_at': " + date_repr, amenstr)
+
+    def test_args_unused(self):
+        amenity = Amenity(None)
+        self.assertNotIn(None, amenity.__dict__.values())
+
     def test_2_amenities_unique_ids(self):
         amenity1 = Amenity()
         amenity2 = Amenity()
@@ -60,6 +82,7 @@ class TestAmenityInstantiation(HBNBCommandTestCase):
         sleep(0.05)
         amenity2 = Amenity()
         self.assertLess(amenity1.created_at, amenity2.created_at)
+
 
 if __name__ == "__main__":
     unittest.main()
