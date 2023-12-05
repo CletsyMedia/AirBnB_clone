@@ -2,7 +2,8 @@
 """Defines unittests for models/amenity.py.
 
 This module contains a series of unittest classes to test the functionality
-of the HBNB console. Each unittest class focuses on specific aspects of the console's behavior.
+of the HBNB console. Each unittest class focuses on specific aspects of the
+console's behavior.
 
 Unittest classes:
     TestAmenityInstantiation
