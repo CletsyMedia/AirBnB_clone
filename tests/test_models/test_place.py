@@ -208,7 +208,7 @@ class TestPlaceSave(HBNBCommandTestCase):
             self.assertIn(plid, f.read())
 
 
-class TestPlace_to_dict(unittest.TestCase):
+class TestPlace_to_dict(HBNBCommandTestCase):
     """Unittests for testing to_dict method of the Place class."""
 
     def test_to_dict_type(self):
