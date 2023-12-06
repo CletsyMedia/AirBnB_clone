@@ -94,5 +94,37 @@ class TestUser_instantiation(HBNBCommandTestCase):
         self.assertEqual(us.created_at, dt)
         self.assertEqual(us.updated_at, dt)
 
+    def test_instantiation_with_None_kwargs(self):
+        with self.assertRaises(TypeError):
+            User(id=None, created_at=None, updated_at=None)
+
+class TestUserSave(HBNBCommandTestCase):
+    """Unittests for testing save method of the  class."""
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_one_save(self):
+        us = User()
+        sleep(0.05)
+        first_updated_at = us.updated_at
+        us.save()
+        self.assertLess(first_updated_at, us.updated_at)
+
+
 if __name__ == "__main__":
     unittest.main()
