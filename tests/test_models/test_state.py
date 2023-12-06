@@ -180,7 +180,6 @@ class TestStateDict(HBNBCommandTestCase):
             tdict['name'] = st.name  # Include 'name' only if it exists
         self.assertDictEqual(st.to_dict(), tdict)
 
-
     def test_contrast_to_dict_dunder_dict(self):
         st = State()
         self.assertNotEqual(st.to_dict(), st.__dict__)
