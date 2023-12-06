@@ -53,6 +53,46 @@ class TestUser_instantiation(HBNBCommandTestCase):
     def test_last_name_is_public_str(self):
         self.assertEqual(str, type(User().last_name))
 
+    def test_two_users_unique_ids(self):
+        us1 = User()
+        us2 = User()
+        self.assertNotEqual(us1.id, us2.id)
+
+    def test_two_users_different_created_at(self):
+        us1 = User()
+        sleep(0.05)
+        us2 = User()
+        self.assertLess(us1.created_at, us2.created_at)
+
+    def test_two_users_different_updated_at(self):
+        us1 = User()
+        sleep(0.05)
+        us2 = User()
+        self.assertLess(us1.updated_at, us2.updated_at)
+
+    def test_str_representation(self):
+        dt = datetime.today()
+        dt_repr = repr(dt)
+        us = User()
+        us.id = "123456"
+        us.created_at = us.updated_at = dt
+        usstr = us.__str__()
+        self.assertIn("[User] (123456)", usstr)
+        self.assertIn("'id': '123456'", usstr)
+        self.assertIn("'created_at': " + dt_repr, usstr)
+        self.assertIn("'updated_at': " + dt_repr, usstr)
+
+    def test_args_unused(self):
+        us = User(None)
+        self.assertNotIn(None, us.__dict__.values())
+
+    def test_instantiation_with_kwargs(self):
+        dt = datetime.today()
+        dt_iso = dt.isoformat()
+        us = User(id="345", created_at=dt_iso, updated_at=dt_iso)
+        self.assertEqual(us.id, "345")
+        self.assertEqual(us.created_at, dt)
+        self.assertEqual(us.updated_at, dt)
 
 if __name__ == "__main__":
     unittest.main()
