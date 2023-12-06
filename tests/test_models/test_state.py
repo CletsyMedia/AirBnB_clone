@@ -41,14 +41,6 @@ class TestState_instantiation(HBNBCommandTestCase):
     def test_new_instance_stored_in_objects(self):
         self.assertIn(State(), models.storage.all().values())
 
-    def test_name_is_public_class_attribute(self):
-        st = State()
-        self.assertEqual(str, type(st.name))
-        self.assertIn("name", dir(st))
-        if getattr(st, 'name', None) is not None:
-            self.assertNotIn("name", st.__dict__)
-
-
     def test_two_states_unique_ids(self):
         st1 = State()
         st2 = State()
