@@ -312,9 +312,9 @@ class TestHBNBCommandAll(HBNBCommandTestCase):
             for cls_nm in classes_to_check:
                 # Use regexp instead of regex
                 repx = r'\b{}\b'.format(regexp.escape(cls_nm))
-                self.assertTrue(any(regexp.search(repx, line) for line in output_lns),
+                self.assertTrue(any(regexp.search(repx, line)
+                                    for line in output_lns),
                                 f"{cls_nm} not found in {output_lns}")
-
 
     def test_all_single_object_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
