@@ -79,10 +79,11 @@ Most commands support various options or arguments. Ensure proper spacing when e
 
 ### Example
 
+When creating a BaseModel instance use `create BaseModel` while in the console it will generate a unique identifier(id) to show the BaseModel instance created use the command `Show BaseModel` with the identifier, do you can `destroy` a BaseModel instance using `destroy BaseModel` with the identifier.
+
 ```bash
 ./console.py
 (hbnb) create BaseModel
-paste the model's ID
 (hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
 ```
 
