@@ -49,3 +49,11 @@ The program can run in two modes: Interactive and Non-interactive.
 ```bash
 ./console.py
 ```
+
+In this mode, a prompt (hbnb) appears, allowing users to enter commands.
+
+### Non-Interactive Mode
+
+```bash
+echo "help" | ./console.py
+```
