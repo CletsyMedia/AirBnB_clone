@@ -58,7 +58,7 @@ In this mode, a prompt (hbnb) appears, allowing users to enter commands.
 echo "help" | ./console.py
 ```
 
-In this a non-interactive mode displays,
+In this mode commands can be piped into the shell for non-interactive mode.
 
 ```(hbnb)
 Documented commands (type help <topic>):
@@ -68,4 +68,3 @@ EOF  all  count  create  destroy  help  quit  show  update
 
 (hbnb)
 ```
-
