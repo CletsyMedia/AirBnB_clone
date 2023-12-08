@@ -92,4 +92,4 @@ To create a `BaseModel` instance, use the command `create BaseModel` in the cons
 
 ## Contact
 
-For queries, echoes, and thoughts that bloom and fuss, don't hesitate to connect, in our haven. [Cletus Samuel](https://cletsymedia.github.io/Prof-Portfolio/)🙏🙏🙏🙏🙏🙏🙏
+For queries, echoes, and thoughts that bloom and fuss, don't hesitate to connect, in my haven. [Cletus Samuel](https://cletsymedia.github.io/Prof-Portfolio/)🙏🙏🙏🙏🙏🙏🙏
