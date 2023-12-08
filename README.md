@@ -89,3 +89,5 @@ To create a `BaseModel` instance, use the command `create BaseModel` in the cons
 (hbnb) create BaseModel
 (hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
 ```
+
+more to follow
