@@ -10,13 +10,16 @@ This project focuses on the backend development of an AirBnB clone, with an inte
 
 The command-line interpreter mimics the Bash shell but is tailored for specific commands relevant to the AirBnB website. Serving as the frontend of the web app, users can interact with the backend developed using Python OOP programming.
 
-#### Available Commands
+### Available Commands
 
-- show
-- create
-- update
-- destroy
-- count
+- `quit` or `EOF`: Exits the program.
+- `help`: Provides information on how to use a command.
+- `create`: Creates a new instance of a valid class and saves it to the JSON file.
+- `show`: Prints the string representation of an instance based on the class name and ID.
+- `destroy`: Deletes an instance based on the class name and ID.
+- `all`: Prints all string representations of instances based on the class name.
+- `update`: Updates an instance based on the class name and ID by adding or updating attributes.
+- `count`: Retrieves the number of instances of a class.
 
 The command line interpreter, coupled with the backend and file storage system, supports various actions, including creating new objects, retrieving objects, performing operations, updating attributes, and destroying objects.
 
@@ -79,21 +82,10 @@ Most commands support various options or arguments. Ensure proper spacing when e
 
 ### Example
 
-When creating a BaseModel instance use `create BaseModel` while in the console it will generate a unique identifier(id) to show the BaseModel instance created use the command `Show BaseModel` with the identifier, do you can `destroy` a BaseModel instance using `destroy BaseModel` with the identifier.
+To create a `BaseModel` instance, use the command `create BaseModel` in the console. This will generate a unique identifier (id). To display the created `BaseModel` instance, use the command `show BaseModel` followed by the identifier. If you wish to destroy a `BaseModel` instance, you can use the `destroy` command with `BaseModel` and the identifier.
 
 ```bash
 ./console.py
 (hbnb) create BaseModel
 (hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
 ```
-
-### Available Commands
-
-- `quit` or `EOF`: Exits the program.
-- `help`: Provides information on how to use a command.
-- `create`: Creates a new instance of a valid class and saves it to the JSON file.
-- `show`: Prints the string representation of an instance based on the class name and ID.
-- `destroy`: Deletes an instance based on the class name and ID.
-- `all`: Prints all string representations of instances based on the class name.
-- `update`: Updates an instance based on the class name and ID by adding or updating attributes.
-- `count`: Retrieves the number of instances of a class.
