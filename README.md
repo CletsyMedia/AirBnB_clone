@@ -1,4 +1,4 @@
-# AirBnB_clone
+# Echoes of Abodes: A Symphony in Code, the ALX AirBnB_clone Project
 
 ![hbnb](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20231207%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231207T232946Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=60290bb3e38198070872a61e3cbcec780eaa17be22e269e64499afc283a63405)
 
