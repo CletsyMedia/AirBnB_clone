@@ -68,3 +68,31 @@ EOF  all  count  create  destroy  help  quit  show  update
 
 (hbnb)
 ```
+
+### Format of Command Input
+
+Commands must be piped through `echo` in non-interactive mode. In interactive mode, commands are entered directly when the prompt appears.
+
+## Arguments
+
+Most commands support various options or arguments. Ensure proper spacing when entering parameters.
+
+### Example
+
+```bash
+./console.py
+(hbnb) create BaseModel
+paste the model's ID
+(hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
+```
+
+### Available Commands
+
+- `quit` or `EOF`: Exits the program.
+- `help`: Provides information on how to use a command.
+- `create`: Creates a new instance of a valid class and saves it to the JSON file.
+- `show`: Prints the string representation of an instance based on the class name and ID.
+- `destroy`: Deletes an instance based on the class name and ID.
+- `all`: Prints all string representations of instances based on the class name.
+- `update`: Updates an instance based on the class name and ID by adding or updating attributes.
+- `count`: Retrieves the number of instances of a class.
