@@ -176,8 +176,6 @@ class TestStateDict(HBNBCommandTestCase):
             'created_at': dt.isoformat(),
             'updated_at': dt.isoformat(),
         }
-        if hasattr(st, 'name'):
-            tdict['name'] = st.name  # Include 'name' only if it exists
         self.assertDictEqual(st.to_dict(), tdict)
 
     def test_contrast_to_dict_dunder_dict(self):
