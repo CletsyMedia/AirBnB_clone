@@ -146,10 +146,10 @@ article {
 
 .places_amenities_pet_friendly,
 .places_amenities_tv,
-.places_amenities_wifi {
+.places_amenities_wifi{
   background-size: cover;
   background-repeat: no-repeat;
+  display: inline-block;
   width: 20px;
   height: 20px;
-  display: inline-block;
 }
